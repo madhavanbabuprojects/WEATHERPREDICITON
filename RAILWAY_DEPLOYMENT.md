@@ -31,9 +31,10 @@ Railway will automatically:
 ## 📁 What Gets Served
 
 ### Main Application (Weather Prediction):
-- **Root URL (`/`)** → Serves `index.html` (Weather Prediction Globe/Map)
+- **Root URL (`/`)** → Serves `intro.html` (Introduction page - Entry point)
+- **`/index.html`** → Weather Prediction Globe/Map
 - **`/intro.html`** → Introduction page
-- **`/hourly.html`** → Hourly weather forecast
+- **`/hourly.html`** → 100-Day weather forecast
 - **`/hourly_24.html`** → 24-hour weather forecast
 - **`/three.min.js`** → Three.js library
 - **`/data/`** → CSV data files (hourly, Pennsylvania forecasts)
@@ -65,7 +66,10 @@ If you see "Application failed to respond":
 `https://weatherprediciton-production.up.railway.app` (or your custom domain)
 
 ### Available Routes:
-- Main App: `https://weatherprediciton-production.up.railway.app/`
+- Main App (Intro): `https://weatherprediciton-production.up.railway.app/`
+- Map View: `https://weatherprediciton-production.up.railway.app/index.html`
+- 100-Day Forecast: `https://weatherprediciton-production.up.railway.app/hourly.html`
+- 24-Hour Forecast: `https://weatherprediciton-production.up.railway.app/hourly_24.html`
 - Portfolio: `https://weatherprediciton-production.up.railway.app/portfolio`
 - Health Check: `https://weatherprediciton-production.up.railway.app/health`
 

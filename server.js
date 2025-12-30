@@ -14,6 +14,7 @@ app.get('/health', (req, res) => {
     routes: {
       main: '/',
       intro: '/intro.html',
+      map: '/index.html',
       hourly: '/hourly.html',
       hourly24: '/hourly_24.html',
       portfolio: '/portfolio'
@@ -48,13 +49,13 @@ app.get('/portfolio/:page', (req, res) => {
   }
 });
 
-// Route for root - serve weather prediction index.html
+// Route for root - serve intro.html as the entry point
 app.get('/', (req, res) => {
-  const indexPath = path.join(__dirname, 'index.html');
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
+  const introPath = path.join(__dirname, 'intro.html');
+  if (fs.existsSync(introPath)) {
+    res.sendFile(introPath);
   } else {
-    res.status(404).send('Weather Prediction index.html not found');
+    res.status(404).send('intro.html not found');
   }
 });
 
@@ -102,7 +103,8 @@ app.use((err, req, res, next) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Weather Prediction & Portfolio server running on port ${PORT}`);
   console.log(`📁 Root directory: ${__dirname}`);
-  console.log(`🌐 Main app (Weather Prediction): http://localhost:${PORT}/`);
+  console.log(`🌐 Main app (Intro): http://localhost:${PORT}/`);
+  console.log(`🗺️  Map View: http://localhost:${PORT}/index.html`);
   console.log(`📊 Portfolio: http://localhost:${PORT}/portfolio`);
   console.log(`📂 Data folders: data/, FORECAST/, HOURLY/, pdf/`);
   console.log(`✅ Server ready!`);
