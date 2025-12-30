@@ -25,7 +25,22 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
-html,
+/* Prevent image overflow on mobile */
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-main);
   background:
@@ -34,6 +49,10 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
+  touch-action: manipulation;
 }
 
 /* MOVING GOLD / BLUE AURA */
@@ -253,6 +272,10 @@ body::after {
     color 0.18s ease;
   font-size: 11px;
   position: relative;
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
 }
 
 .dock-item::before {
@@ -520,6 +543,10 @@ body::after {
   text-transform: uppercase;
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
     transform 0.15s ease;
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3);
 }
 
 .btn-gold {
@@ -708,6 +735,9 @@ body::after {
   background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(55, 65, 81, 0.8);
   padding: 12px 12px 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  touch-action: manipulation;
 }
 
 .summary-card h3 {
@@ -734,6 +764,10 @@ body::after {
   border: 1px solid rgba(75, 85, 99, 0.9);
   padding: 12px 12px 14px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .project-card:hover {
@@ -1234,9 +1268,12 @@ body.skills-overlay-open .mini-terminal {
   display: block;
   height: 40px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
   filter: grayscale(0.15) saturate(1.2);
   opacity: 0.9;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .logo-label {
@@ -1347,6 +1384,11 @@ body.skills-overlay-open .mini-terminal {
   font-family: inherit;
   outline: none;
   transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  min-height: 44px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 
 .contact-form input:focus,
@@ -1683,57 +1725,612 @@ body.skills-overlay-open .mini-terminal {
   color: var(--gold);
 }
 
-/* RESPONSIVE */
+/* ========== COMPREHENSIVE MOBILE RESPONSIVE STYLES ========== */
+
+/* TABLET AND BELOW */
 @media (max-width: 960px) {
   .desktop {
     padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 100px;
+  }
+
+  .os-bar {
+    padding: 0 12px;
+    height: 40px;
+  }
+
+  .os-logo {
+    font-size: 11px;
+  }
+
+  .os-tag {
+    font-size: 9px;
+    padding: 2px 6px;
   }
 
   .os-dock {
     position: fixed;
     flex-direction: row;
-    width: auto;
-    height: 64px;
-    bottom: 10px;
+    width: calc(100% - 24px);
+    max-width: 600px;
+    height: 70px;
+    bottom: 12px;
     top: auto;
     left: 50%;
     transform: translateX(-50%);
-    padding-inline: 10px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .os-dock::-webkit-scrollbar {
+    display: none;
   }
 
   .dock-item {
-    flex: 1;
-    padding-inline: 6px;
+    scroll-snap-align: start;
+  }
+
+  .dock-item {
+    flex: 0 0 auto;
+    padding: 6px 8px;
+    min-width: 60px;
+  }
+
+  .dock-icon {
+    font-size: 18px;
+  }
+
+  .dock-label {
+    font-size: 9px;
+    margin-top: 2px;
   }
 
   .hero-body {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .hero-right {
     order: -1;
   }
 
+  .hero-name {
+    font-size: 28px;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+  }
+
+  .hero-spec {
+    grid-template-columns: 1fr;
+  }
+
   .skills-map {
-    height: 260px;
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: none;
+    padding: 14px;
+  }
+
+  .skills-center-panel {
+    margin-bottom: 14px;
+  }
+
+  .skills-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: none;
+  }
+
+  .window {
+    margin: 16px auto;
+  }
+
+  .window-body {
+    padding: 16px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blueprint-card {
+    min-height: 200px;
+    padding: 16px;
+  }
+
+  .bp-main {
+    width: 90%;
+  }
+
+  .client-marquee-container {
+    padding: 8px 0;
+  }
+
+  .client-track {
+    gap: 20px;
+    padding-inline: 16px;
+  }
+
+  .client-logo-item {
+    min-width: 90px;
+  }
+
+  .logo-wrapper img {
+    height: 35px;
+  }
+
+  .timeline {
+    padding-left: 16px;
+  }
+
+  .timeline-content {
+    padding-left: 18px;
   }
 }
 
+/* MOBILE PHONES */
 @media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  .desktop {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 50px;
+    padding-bottom: 90px;
+  }
+
+  .os-bar {
+    height: 38px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .os-logo {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .os-tag {
+    display: none;
+  }
+
+  .os-right {
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .os-dock {
+    width: calc(100% - 20px);
+    height: 68px;
+    bottom: 10px;
+    padding: 6px 8px;
+    gap: 3px;
+  }
+
+  .dock-item {
+    padding: 5px 6px;
+    min-width: 55px;
+  }
+
+  .dock-icon {
+    font-size: 16px;
+  }
+
+  .dock-label {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .window {
+    margin: 12px auto;
+    border-radius: 16px;
+  }
+
+  .window-header {
+    height: 32px;
+    padding: 0 10px;
+  }
+
+  .window-title {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .window-controls {
+    gap: 3px;
+  }
+
   .window-body {
-    padding-inline: 14px;
+    padding: 14px 12px;
   }
 
   .hero-name {
-    font-size: 26px;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+
+  .hero-label {
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+
+  .hero-rotating {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .hero-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .hero-spec {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .spec-item {
+    padding: 8px;
+  }
+
+  .spec-label {
+    font-size: 9px;
+  }
+
+  .spec-value {
+    font-size: 12px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  .blueprint-card {
+    min-height: 180px;
+    padding: 14px;
+  }
+
+  .bp-main {
+    width: 95%;
+    margin: 16px auto 0;
+  }
+
+  .bp-title {
+    font-size: 10px;
+  }
+
+  .bp-list {
+    font-size: 11px;
+  }
+
+  .section-intro {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .summary-card h3 {
+    font-size: 14px;
+  }
+
+  .summary-card p {
+    font-size: 12px;
+  }
+
+  .summary-card ul {
+    font-size: 12px;
+  }
+
+  .project-card h3 {
+    font-size: 14px;
+  }
+
+  .project-role {
+    font-size: 11px;
+  }
+
+  .project-card p {
+    font-size: 12px;
+  }
+
+  .project-tags {
+    gap: 5px;
+  }
+
+  .project-tags span {
+    font-size: 9px;
+    padding: 3px 7px;
+  }
+
+  .timeline-content h3 {
+    font-size: 14px;
+  }
+
+  .timeline-date {
+    font-size: 10px;
+  }
+
+  .timeline-content p {
+    font-size: 12px;
+  }
+
+  .skills-map {
+    padding: 12px;
+  }
+
+  .skills-center-title {
+    font-size: 16px;
+  }
+
+  .skills-center-sub {
+    font-size: 12px;
+  }
+
+  .skills-center-meta {
+    gap: 5px;
+  }
+
+  .skills-center-meta span {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  .skills-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .skills-node-title {
+    font-size: 11px;
+  }
+
+  .skills-tags span {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  .cert-card h3 {
+    font-size: 14px;
+  }
+
+  .cert-card ul {
+    font-size: 12px;
+  }
+
+  .cert-card li {
+    margin-bottom: 3px;
+  }
+
+  .contact-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .contact-form textarea {
+    min-height: 100px;
   }
 
   .mini-terminal {
     display: none;
   }
 
-  .contact-body {
+  .footer {
+    font-size: 10px;
+    padding-top: 8px;
+  }
+
+  .client-track {
+    gap: 16px;
+    padding-inline: 12px;
+  }
+
+  .client-logo-item {
+    min-width: 80px;
+  }
+
+  .logo-wrapper {
+    padding: 5px 8px;
+  }
+
+  .logo-wrapper img {
+    height: 32px;
+  }
+
+  .logo-label {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  /* Stack grid adjustments */
+  .stack-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stack-col {
+    padding: 10px;
+  }
+
+  .stack-col h3 {
+    font-size: 13px;
+  }
+
+  .stack-col ul {
+    font-size: 12px;
+  }
+
+  /* Chip row adjustments */
+  .chip-row {
+    gap: 5px;
+  }
+
+  .chip {
+    font-size: 10px;
+    padding: 3px 7px;
+  }
+
+  /* Summary stats */
+  .summary-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .summary-stat-value {
+    font-size: 16px;
+  }
+
+  .summary-stat-sub {
+    font-size: 11px;
+  }
+}
+
+/* VERY SMALL MOBILE PHONES */
+@media (max-width: 400px) {
+  .desktop {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .os-dock {
+    width: calc(100% - 16px);
+    padding: 5px 6px;
+    height: 64px;
+  }
+
+  .dock-item {
+    min-width: 50px;
+    padding: 4px 5px;
+  }
+
+  .dock-icon {
+    font-size: 14px;
+  }
+
+  .dock-label {
+    font-size: 7px;
+  }
+
+  .window {
+    margin: 10px auto;
+  }
+
+  .window-body {
+    padding: 12px 10px;
+  }
+
+  .hero-name {
+    font-size: 22px;
+  }
+
+  .blueprint-card {
+    padding: 12px;
+    min-height: 160px;
+  }
+
+  .btn {
+    padding: 9px 14px;
+    font-size: 11px;
+  }
+
+  /* Ensure all text is readable */
+  .section-intro,
+  .hero-desc,
+  .summary-card p,
+  .project-card p,
+  .timeline-content p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Prevent horizontal scrolling */
+  * {
+    max-width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* LANDSCAPE MOBILE ORIENTATION */
+@media (max-width: 960px) and (orientation: landscape) {
+  .os-dock {
+    height: 60px;
+    bottom: 8px;
+  }
+
+  .desktop {
+    padding-bottom: 80px;
+  }
+}
+
+/* TOUCH DEVICE IMPROVEMENTS */
+@media (hover: none) and (pointer: coarse) {
+  .dock-item:hover {
+    transform: none;
+  }
+
+  .dock-item:active {
+    transform: scale(0.95);
+    background: rgba(15, 23, 42, 0.95);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-card:active {
+    transform: scale(0.98);
+  }
+
+  .summary-card:hover {
+    transform: none;
+  }
+
+  .summary-card:active {
+    transform: scale(0.98);
+  }
+
+  .window:hover {
+    transform: none;
   }
 }
 

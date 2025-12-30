@@ -1,19 +1,20 @@
 {
-  "name": "madhavan-portfolio",
+  "name": "weather-prediction-portfolio",
   "version": "1.0.0",
-  "description": "Madhavan Babu - Advanced Portfolio Website with Cloud & Data Engineering Expertise",
+  "description": "AI Weather Prediction System & Portfolio - Pennsylvania Weather Forecasting with Machine Learning",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
   },
   "keywords": [
+    "weather-prediction",
+    "ai",
+    "machine-learning",
+    "forecasting",
     "portfolio",
-    "cloud-architect",
-    "data-engineer",
-    "azure",
-    "aws",
-    "gcp"
+    "pennsylvania",
+    "data-visualization"
   ],
   "author": "Madhavan Babu",
   "license": "MIT",
