@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Summary</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- summary-page extra styling -->
+  <style>
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .summary-stat {
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.6);
+    }
+    .summary-stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .summary-stat-value {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold-soft);
+      margin-bottom: 2px;
+    }
+    .summary-stat-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 10px;
+    }
+    .chip {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-muted);
+    }
+
+    .stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.stack-col {
+  position: relative;
+  border-radius: 14px;
+  padding: 12px 12px 14px;
+  background: radial-gradient(circle at top left,
+    rgba(15, 23, 42, 0.96),
+    rgba(15, 23, 42, 0.92)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.75);
+}
+
+.stack-col::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at top,
+    rgba(212, 175, 55, 0.12),
+    transparent 60%);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+.stack-title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.stack-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  background: radial-gradient(circle at top, rgba(212, 175, 55, 0.2), rgba(15, 23, 42, 1));
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.stack-col h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.stack-col ul {
+  position: relative;
+  list-style: none;
+  padding-left: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.stack-col li::before {
+  content: "• ";
+  color: var(--gold);
+}
+
+
+    .callout {
+      border-radius: 12px;
+      border: 1px solid rgba(212,175,55,0.7);
+      background: radial-gradient(circle at top left, rgba(212,175,55,0.1), rgba(15,23,42,0.96));
+      padding: 10px 12px;
+      margin-top: 14px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.7);
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+    .callout-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .summary-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: SUMMARY</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: SUMMARY_MODULE</div>
+        <div class="boot-line">> source: PROFESSIONAL_SUMMARY + SYNOPSIS</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">SUMMARY VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item dock-active" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>summary-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> loading: PROFESSIONAL_SUMMARY …</div>
+      <div>> loading: CLOUD_STACK_MAP …</div>
+      <div>> loading: SYNOPSIS_CHANNELS …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- WINDOW 1: PROFILE SNAPSHOT -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Professional Summary — ARCH_23 Profile Snapshot</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+
+        <!-- quick stats strip -->
+        <div class="summary-stats">
+  <div class="summary-stat">
+    <div class="summary-stat-label">Experience</div>
+    <div class="summary-stat-value">23+ Years</div>
+    <div class="summary-stat-sub">Cloud, data, infra &amp; transformation</div>
+  </div>
+
+  <div class="summary-stat">
+    <div class="summary-stat-label">Multi-Cloud</div>
+    <div class="summary-stat-value">AWS • Azure • GCP</div>
+    <div class="summary-stat-sub">Enterprise-grade architectures</div>
+  </div>
+
+  <!-- UPDATED THIRD CARD -->
+  <div class="summary-stat">
+    <div class="summary-stat-label">Focus Areas</div>
+    <div class="summary-stat-value">Cloud • Data • DevOps</div>
+    <div class="summary-stat-sub">
+      Cloud infrastructure • Data engineering • DevOps • Digital transformation
+    </div>
+  </div>
+</div>
+
+
+        <!-- short narrative + chips -->
+        <p class="section-intro">
+          Dynamic and accomplished IT professional specializing in <strong>cloud infrastructure
+          architecture</strong>, <strong>data engineering</strong>, <strong>DevOps</strong>, and large-scale
+          <strong>digital transformation</strong>. Proven track record as a
+          <strong>Cloud Infrastructure Architect</strong> across <strong>UNIX, Azure, AWS, and GCP</strong>
+          environments, delivering enterprise-grade solutions for global organizations.
+        </p>
+
+        <div class="chip-row">
+          <span class="chip">Cloud Infra Architect</span>
+          <span class="chip">Transition &amp; Transformation Lead</span>
+          <span class="chip">Data Platform Designer</span>
+          <span class="chip">DevOps / Automation</span>
+        </div>
+
+        <p class="section-intro">
+          Expertise spans multi-cloud platforms including <strong>Amazon Web Services (AWS)</strong>,
+          <strong>Microsoft Azure</strong>, and <strong>Google Cloud Platform (GCP)</strong>. Led mission-critical
+          projects utilizing tools and technologies such as <strong>Terraform</strong>,
+          <strong>Ansible Automation</strong>, <strong>Kubernetes</strong>, <strong>Docker</strong>,
+          <strong>Azure DevOps</strong>, <strong>OpenShift</strong>, <strong>VMware</strong>,
+          <strong>Windows</strong>, and <strong>UNIX systems</strong>.
+        </p>
+
+        <p class="section-intro">
+          Brings deep experience in <strong>cloud migration</strong> and
+          <strong>infrastructure modernization</strong>, with hands-on proficiency in
+          <strong>Azure Data Factory</strong>, <strong>Azure Migrate</strong>,
+          <strong>Azure VMware Solution (AVS)</strong>, <strong>Azure Site Recovery (ASR)</strong>,
+          <strong>Site Recovery Manager (SRM)</strong>, <strong>PlateSpin</strong>, and
+          <strong>vRealize Automation (vRA)</strong> — enabling <strong>seamless transitions to the cloud</strong>
+          and <strong>optimized enterprise IT operations</strong>.
+        </p>
+
+        <p class="section-intro">
+          Possesses hands-on expertise in modern data platforms and analytics ecosystems including
+          <strong>Databricks</strong>, <strong>Snowflake</strong>, <strong>ELT/ETL</strong>, <strong>Apache Spark</strong>,
+          <strong>Hadoop</strong>, <strong>Azure Synapse</strong>, <strong>Apache Airflow</strong>,
+          <strong>Kafka</strong>, and <strong>Delta Lake</strong>. Specializes in architecting
+          <strong>scalable data pipelines</strong> and <strong>analytics solutions</strong>.
+        </p>
+
+        <p class="section-intro">
+          Data science and machine learning experience spans <strong>Python</strong>,
+          <strong>SQL Server</strong>, <strong>Scikit-learn</strong>, <strong>TensorFlow</strong>,
+          <strong>PyTorch</strong>, <strong>MLflow</strong>, and <strong>MLOps best practices</strong>
+          to build and operationalize intelligent systems, with strong visualization skills using
+          <strong>Power BI</strong> and <strong>Tableau</strong>.
+        </p>
+
+        <p class="section-intro">
+          Adept at client engagement and cross-functional collaboration, with strong
+          <strong>written</strong>, <strong>oral</strong>, and <strong>interpersonal communication skills</strong>
+          that drive strategy, innovation, and execution across diverse environments.
+        </p>
+
+        <div class="callout">
+          <div class="callout-label">Positioning</div>
+          <p>
+            Technical depth, leadership, and a proven record of delivering impactful
+            <strong>cloud</strong>, <strong>AI</strong>, and <strong>data solutions</strong> firmly establish
+            this profile as a <strong>highly skilled and strategically vital professional</strong> —
+            uniquely positioned to contribute to the <strong>technological and economic interests of
+            the United States</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WINDOW 2: CLOUD + DATA STACK MAP -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Cloud &amp; Data Stack — Tools at a Glance</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          The same information from your written summary, re-organized into a visual stack so
+          recruiters and reviewers can scan capabilities instantly.
+        </p>
+
+        <div class="stack-grid">
+  <div class="stack-col">
+    <div class="stack-title-row">
+      <div class="stack-icon">☁</div>
+      <h3>Cloud Infrastructure &amp; Migration</h3>
+    </div>
+    <ul>
+      <li>AWS, Azure, GCP multi-cloud architectures</li>
+      <li>UNIX, Windows, VMware, AVS</li>
+      <li>Terraform, Ansible Automation</li>
+      <li>Kubernetes, Docker, OpenShift</li>
+      <li>Azure Migrate, AVS, ASR, SRM</li>
+      <li>PlateSpin, vRealize Automation (vRA)</li>
+    </ul>
+  </div>
+
+  <div class="stack-col">
+    <div class="stack-title-row">
+      <div class="stack-icon">📊</div>
+      <h3>Data Platforms &amp; Analytics</h3>
+    </div>
+    <ul>
+      <li>Databricks, Snowflake, ELT/ETL</li>
+      <li>Apache Spark, Hadoop, Delta Lake</li>
+      <li>Azure Synapse, Apache Airflow, Kafka</li>
+      <li>Azure Data Factory (ADF)</li>
+      <li>Power BI, Tableau reporting &amp; dashboards</li>
+    </ul>
+  </div>
+
+  <div class="stack-col">
+    <div class="stack-title-row">
+      <div class="stack-icon">🤖</div>
+      <h3>Data Science, ML &amp; MLOps</h3>
+    </div>
+    <ul>
+      <li>Python, SQL Server</li>
+      <li>Scikit-learn, TensorFlow, PyTorch</li>
+      <li>MLflow &amp; MLOps best practices</li>
+      <li>End-to-end model operationalization</li>
+      <li>Integration with cloud &amp; data platforms</li>
+    </ul>
+  </div>
+</div>
+
+    </section>
+
+    <!-- WINDOW 3: SYNOPSIS (YOUR BULLET LIST, VISUALIZED) -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Synopsis — Key Capabilities</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Every point from your resume synopsis is preserved here, but grouped into two focus
+          lanes so it feels like a control panel instead of a wall of bullets.
+        </p>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>Cloud, Data &amp; Platform Solutions</h3>
+            <ul style="list-style: disc; padding-left: 18px; font-size:13px; color:var(--text-muted);">
+              <li>
+                Provide <strong>Azure Data Factory</strong> solutions to clients to achieve
+                <strong>data migration</strong> and <strong>data preservation</strong>.
+              </li>
+              <li>
+                Have strong operational skill sets to work on and manage
+                <strong>UNIX / Cloud / VMware / Windows</strong> platforms.
+              </li>
+              <li>
+                Provide complete <strong>Cloud and Compute solutions</strong> to clients to achieve
+                better benchmarking and <strong>reduce footprints in the data center</strong>.
+              </li>
+              <li>
+                Technically capable of managing and providing solutions to both
+                <strong>UNIX</strong> and <strong>Azure/AWS cloud platforms</strong>.
+              </li>
+              <li>
+                Have good knowledge and experience setting up
+                <strong>Azure DevOps</strong> and <strong>Jenkins pipelines</strong> for infrastructure builds.
+              </li>
+              <li>
+                Work with teams such as <strong>Storage</strong>, <strong>Network</strong>,
+                <strong>Database</strong>, and <strong>SAP</strong> to understand requirements and
+                avoid performance issues during regular operations.
+              </li>
+            </ul>
+          </div>
+
+          <div class="summary-card">
+            <h3>Transformation, Migration &amp; Governance</h3>
+            <ul style="list-style: disc; padding-left: 18px; font-size:13px; color:var(--text-muted);">
+              <li>
+                As a <strong>Cloud/UNIX/VMware Transition &amp; Transformation SME</strong>, design
+                <strong>cloud solutions</strong>, build <strong>new data centers</strong>, and execute
+                migrations from old to new infrastructure, including <strong>on-premises to cloud</strong>,
+                while providing healthy programs to avoid risk during migrations.
+              </li>
+              <li>
+                Understand <strong>physical infrastructure</strong> and provide solutions to migrate into
+                <strong>virtualization technologies</strong> and <strong>lift-and-shift</strong> approaches.
+              </li>
+              <li>
+                Prepare <strong>HLD (High Level Design)</strong>, <strong>LLD (Low Level Design)</strong>,
+                and <strong>build documents</strong> for existing and new environments, enabling both
+                clients and internal teams to understand the solution.
+              </li>
+              <li>
+                Work with <strong>vendors</strong> on quotes and technical challenges to avoid any gaps
+                during the build and transformation process.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: SUMMARY • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

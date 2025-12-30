@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Projects</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SCREEN (same as index.html) -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: PROJECTS</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: PROJECTS_MODULE</div>
+        <div class="boot-line">> source: ENTERPRISE_CLOUD / DATA / INFRA</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">PROJECTS VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK (PROJECTS active) -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item dock-active" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>projects-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> listing: KEY_ENTERPRISE_PROJECTS …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- PROJECTS WINDOW -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Projects — Enterprise Cloud & Data Programs</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+
+        <p class="section-intro">
+          Selected large-scale cloud, data, and infrastructure programs across healthcare, life sciences,
+          telecom, and enterprise clients. Each card shows the business context, your role, and the
+          technical stack that was used.
+        </p>
+
+        <div class="cards-grid">
+
+          <!-- IQVIA PROJECTS -->
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/msag.jpeg" alt="IQVIA / HCS" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>HCS – Healthcare Compute Solution (IQVIA)</h3>
+                <div class="project-role">Azure Cloud Solutions Architect · IQVIA · 2022–Present</div>
+              </div>
+            </div>
+            <p>
+              Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) components 
+              designed on Microsoft Azure Resource Types. HCS has existing Azure subscription with 
+              Azure AD Domain Services &amp; Virtual Networks/On-premises VPN connectivity for product 
+              and engineering. Quarterly data refresh using ADF pipeline.
+            </p>
+            <ul class="project-tags">
+              <li>Azure</li><li>ADF</li><li>IaaS</li><li>PaaS</li><li>Landing Zones</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/msag.jpeg" alt="CSL Financial Group" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>CSL – Financial Group Archive Solution (IQVIA)</h3>
+                <div class="project-role">Azure Cloud Solutions Architect · IQVIA</div>
+              </div>
+            </div>
+            <p>
+              Platform for the Archive Solution is Microsoft Azure. Solution using Azure IaaS and PaaS 
+              components designed on Microsoft Azure Resource Types. CSL has existing Azure subscription 
+              with Azure AD Domain Services &amp; Virtual Networks/On-premises VPN connectivity for 
+              archive staging sites.
+            </p>
+            <ul class="project-tags">
+              <li>Azure</li><li>Archive</li><li>IaaS</li><li>PaaS</li><li>Data Preservation</li>
+            </ul>
+          </article>
+
+          <!-- HCL PROJECTS -->
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Vmare.webp" alt="CNO Financial" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>CNO – Financial Group (HCL)</h3>
+                <div class="project-role">Compute Architect · HCL America · Current Project</div>
+              </div>
+            </div>
+            <p>
+              Cisco UCSM and VMware design/build and migration solutions to migrate the workloads 
+              (Unix and Windows) to new data centers using SRM (Site Recovery Manager).
+            </p>
+            <ul class="project-tags">
+              <li>Cisco UCSM</li><li>VMware</li><li>SRM</li><li>Migration</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Vmare.webp" alt="Syneos Health" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Syneos Health – 1500+ Workload Migration</h3>
+                <div class="project-role">Solutions Architect · HCL America</div>
+              </div>
+            </div>
+            <p>
+              Setup Azure LandingZone for Migrating 1500+ Workloads (UNIX and Windows) for Globally 
+              distributed DC's and Azure VMware Solution (AVS) migrations.
+            </p>
+            <ul class="project-tags">
+              <li>AVS</li><li>Azure Landing Zone</li><li>1500+ Workloads</li><li>Migration</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/AIX.png" alt="Canadian Tier" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Canadian Tier (CTC) – IBM Power9 Migration</h3>
+                <div class="project-role">Power Systems Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Solutioning the data center build on IBM Power 9 and migrating LPARs from Power8 to 
+              Power 9 Frames (LPM - Live Partition Mobility).
+            </p>
+            <ul class="project-tags">
+              <li>IBM Power9</li><li>LPM</li><li>Power8 to Power9</li><li>LPARs</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Windows.png" alt="BCBSRI" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>BCBSRI – Blue Cross Blue Shield of Rhode Island</h3>
+                <div class="project-role">Solutions Architect · HCL America</div>
+              </div>
+            </div>
+            <p>
+              Design and Setup Azure Landing Zone for Migrating 800+ Workloads (UNIX and Windows) 
+              for Globally distributed DC's.
+            </p>
+            <ul class="project-tags">
+              <li>Azure Landing Zone</li><li>800+ Workloads</li><li>Healthcare</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Windows.png" alt="Smith & Nephew" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Smith &amp; Nephew – 800+ Workload Migration</h3>
+                <div class="project-role">Solutions Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Design and Setup Azure Landing Zone for Migrating 800+ Workloads (UNIX and Windows) 
+              for Globally distributed DC's.
+            </p>
+            <ul class="project-tags">
+              <li>Azure Landing Zone</li><li>800+ Workloads</li><li>Medical Devices</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/AIX.png" alt="BD" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>BD – Becton Dickinson</h3>
+                <div class="project-role">Data Center Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Data center build and migrations on IBM Power9 and Windows/VMware platform migrations 
+              for global healthcare technology company.
+            </p>
+            <ul class="project-tags">
+              <li>IBM Power9</li><li>VMware</li><li>Windows</li><li>DC Build</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Unix.avif" alt="GSK" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>GSK – GlaxoSmithKline</h3>
+                <div class="project-role">UNIX Transition Lead · HCL</div>
+              </div>
+            </div>
+            <p>
+              Entire UNIX landscape (AIX, Linux, HP-UX) Infrastructure Transition for global 
+              pharmaceutical company.
+            </p>
+            <ul class="project-tags">
+              <li>AIX</li><li>Linux</li><li>HP-UX</li><li>Infrastructure Transition</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Windows.png" alt="PayPal" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>PayPal – 500+ Workload Migration</h3>
+                <div class="project-role">Solutions Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Designed and Setup Azure Site Recovery and Azure Migrate. Also Migrated 500+ various 
+              Workloads for Globally distributed DC's.
+            </p>
+            <ul class="project-tags">
+              <li>Azure Site Recovery</li><li>Azure Migrate</li><li>500+ Workloads</li><li>Financial Services</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Linux.jpg" alt="RFIH" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>RFIH – Synchrony Financial</h3>
+                <div class="project-role">Infrastructure Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Linux, Greenplum DCA and VScale Infrastructure Transition for financial services company.
+            </p>
+            <ul class="project-tags">
+              <li>Linux</li><li>Greenplum DCA</li><li>VScale</li><li>Infrastructure Transition</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Vmare.webp" alt="Anglo American" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Anglo American, South Africa</h3>
+                <div class="project-role">VMware Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              DC Tech refresh project - Installation of VMware 6.5 on DELL M1000e and HP chassis. 
+              DR Solution - VMware Site Recovery Manager 8.1 and migrate the data centers.
+            </p>
+            <ul class="project-tags">
+              <li>VMware 6.5</li><li>SRM 8.1</li><li>DELL M1000e</li><li>HP Chassis</li><li>DR Solution</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Somos.png" alt="Somos" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>SOMOS – DR Datacenter Setup</h3>
+                <div class="project-role">Compute Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Transformation activities to setup DR Datacenter for Compute and DC migrations activity 
+              for telecom numbering services.
+            </p>
+            <ul class="project-tags">
+              <li>DR Datacenter</li><li>Compute</li><li>DC Migration</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/msag.jpeg" alt="MSAG" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>MSAG – The Main Street America Group</h3>
+                <div class="project-role">UNIX/VMware Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Transition and Transformation UNIX/VMware project for US-Florida region insurance company.
+            </p>
+            <ul class="project-tags">
+              <li>UNIX</li><li>VMware</li><li>Transformation</li><li>Insurance</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Rogers Communication.webp" alt="Rogers Communications" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Rogers Communications, Canada</h3>
+                <div class="project-role">UNIX/VMware Architect · HCL</div>
+              </div>
+            </div>
+            <p>
+              Transition and Build Data Center, Data Center Migration and maintain large enterprise 
+              infrastructure with 3000+ UNIX/VMware/Windows Storage running business critical Canadian 
+              communications project. Deployed to client location to represent build and migration plan and designs.
+            </p>
+            <ul class="project-tags">
+              <li>DC Build</li><li>3000+ Workloads</li><li>UNIX</li><li>VMware</li><li>Windows</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/Unilever.avif" alt="Unilever" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>Unilever, UK</h3>
+                <div class="project-role">UNIX Technical SME · HCL</div>
+              </div>
+            </div>
+            <p>
+              Worked as a Technical Subject Matter Expert to support entire UNIX team in various regions 
+              for global consumer goods company.
+            </p>
+            <ul class="project-tags">
+              <li>UNIX</li><li>SME</li><li>Global Support</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <img src="images/AstraZeneca.webp" alt="AstraZeneca" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+              <div>
+                <h3>AstraZeneca, Singapore</h3>
+                <div class="project-role">UNIX SME · HCL Singapore</div>
+              </div>
+            </div>
+            <p>
+              Build Data Center Setup, Data Center Migration (Transformation Project) and maintain large 
+              enterprise infrastructure with 3000+ AIX/LINUX/Windows running business critical project. 
+              Controlled two huge Datacenters in Singapore and Sweden.
+            </p>
+            <ul class="project-tags">
+              <li>DC Build</li><li>3000+ Workloads</li><li>AIX</li><li>Linux</li><li>Windows</li><li>Singapore</li><li>Sweden</li>
+            </ul>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: PROJECTS • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

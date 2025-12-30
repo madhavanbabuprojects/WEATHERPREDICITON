@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Weather Prediction | 24-Hour Hourly Forecast</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --bg-dark: #0a0e27;
+      --bg-darker: #050811;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #00d9ff;
+      --accent-hover: #33e0ff;
+      --accent-dark: #0099cc;
+      --accent-glow: rgba(0, 217, 255, 0.5);
+      --glass-bg: rgba(15, 23, 42, 0.8);
+      --glass-bg-light: rgba(15, 23, 42, 0.6);
+      --glass-border: rgba(148, 163, 184, 0.2);
+      --shadow-soft: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      --shadow-glow: 0 0 60px rgba(0, 217, 255, 0.6);
+      --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --gradient-primary: linear-gradient(135deg, #00d9ff 0%, #0066ff 50%, #8b5cf6 100%);
+      --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+      --gradient-accent: linear-gradient(135deg, #00d9ff, #0066ff);
+    }
+
+    /* Advanced Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 30px rgba(0, 217, 255, 0.4), 0 0 60px rgba(0, 217, 255, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 50px rgba(0, 217, 255, 0.6), 0 0 100px rgba(0, 217, 255, 0.3);
+      }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1) rotate(5deg);
+      }
+      70% {
+        transform: scale(0.95) rotate(-2deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: translateY(0) scaleY(1);
+      }
+      50% {
+        transform: translateY(-8px) scaleY(1.1);
+      }
+    }
+
+    @keyframes shimmerText {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @keyframes particleFloat {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translate(20px, -20px) rotate(180deg);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes rotateIn {
+      from {
+        opacity: 0;
+        transform: rotate(-180deg) scale(0.5);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    /* Animated Background Particles */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 15% 25%, rgba(0, 217, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(0, 102, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+      background-size: 200% 200%;
+      pointer-events: none;
+      z-index: 0;
+      animation: gradientShift 25s ease infinite;
+    }
+
+    /* Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: particleFloat 20s infinite ease-in-out;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 15s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 22s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 16s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 20s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 17s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 19s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; animation-duration: 21s; }
+    .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; animation-duration: 23s; }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 14, 39, 0.85);
+      backdrop-filter: blur(50px) saturate(200%);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header-title {
+      font-size: 2rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      animation: gradientShift 5s ease infinite, glow 3s ease-in-out infinite;
+      text-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
+      position: relative;
+    }
+
+    .header-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      border-radius: 2px;
+      animation: gradientShift 5s ease infinite;
+      opacity: 0.6;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 217, 255, 0.1);
+      border: 1.5px solid rgba(0, 217, 255, 0.3);
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.4), transparent);
+      transition: left 0.6s;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      background: rgba(0, 217, 255, 0.2);
+      border-color: var(--accent);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 217, 255, 0.5);
+      color: var(--accent-hover);
+    }
+
+    .nav-link:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      margin-top: 90px;
+      padding: 2.5rem;
+      max-width: 1800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* City Selector */
+    .city-selector {
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .city-selector-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .city-selector-label::before {
+      content: '📍';
+      font-size: 1.2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .city-selector-wrapper {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .city-select {
+      flex: 1;
+      min-width: 320px;
+      padding: 1.25rem 1.75rem;
+      border-radius: var(--radius-md);
+      background: var(--glass-bg);
+      backdrop-filter: blur(50px) saturate(200%);
+      border: 2px solid var(--glass-border);
+      color: var(--text-light);
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .city-select::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.15), rgba(139, 92, 246, 0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      animation: spin 20s linear infinite;
+      pointer-events: none;
+    }
+
+    .city-select::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+
+    .city-select:hover::after {
+      left: 100%;
+    }
+
+    .city-select:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 50px rgba(0, 217, 255, 0.5), 0 0 100px rgba(139, 92, 246, 0.3);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(139, 92, 246, 0.1));
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .city-select:hover::before {
+      opacity: 1;
+    }
+
+    .city-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.4), 0 0 60px rgba(0, 217, 255, 0.6), 0 0 120px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(139, 92, 246, 0.15));
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    .city-select:focus::before {
+      opacity: 1;
+    }
+
+    /* When a city is selected - make it super colorful */
+    .city-select:not([value=""]) {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.15));
+      border: 3px solid;
+      border-image: linear-gradient(135deg, #00d9ff, #0066ff, #8b5cf6, #ec4899) 1;
+      box-shadow: 0 0 60px rgba(0, 217, 255, 0.6), 
+                  0 0 100px rgba(139, 92, 246, 0.4),
+                  0 0 140px rgba(236, 72, 153, 0.3),
+                  inset 0 0 30px rgba(0, 217, 255, 0.2);
+      animation: gradientShift 4s ease infinite, glow 3s ease-in-out infinite;
+      color: #ffffff;
+      font-weight: 700;
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+    }
+
+    .city-select:not([value=""])::before {
+      opacity: 1;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.3), rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.2), transparent 70%);
+    }
+
+    /* Style the dropdown options */
+    .city-select option {
+      background: #0a0e27;
+      color: var(--text-light);
+      padding: 1rem;
+      font-weight: 500;
+    }
+
+    .city-select option:hover {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(139, 92, 246, 0.15));
+    }
+
+    .city-select option:checked {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(139, 92, 246, 0.25));
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Enhanced styling when city is selected */
+    .city-select.city-selected {
+      background: linear-gradient(135deg, 
+        rgba(0, 217, 255, 0.3) 0%, 
+        rgba(0, 102, 255, 0.25) 25%,
+        rgba(139, 92, 246, 0.25) 50%,
+        rgba(236, 72, 153, 0.2) 75%,
+        rgba(0, 217, 255, 0.3) 100%);
+      background-size: 300% 300%;
+      border: 3px solid;
+      border-image: linear-gradient(135deg, #00d9ff, #0066ff, #8b5cf6, #ec4899, #00d9ff) 1;
+      border-image-slice: 1;
+      box-shadow: 
+        0 0 80px rgba(0, 217, 255, 0.7), 
+        0 0 120px rgba(139, 92, 246, 0.5),
+        0 0 160px rgba(236, 72, 153, 0.4),
+        inset 0 0 40px rgba(0, 217, 255, 0.3),
+        inset 0 0 60px rgba(139, 92, 246, 0.2);
+      animation: gradientShift 3s ease infinite, glow 2.5s ease-in-out infinite;
+      color: #ffffff;
+      font-weight: 800;
+      text-shadow: 
+        0 0 20px rgba(0, 217, 255, 1),
+        0 0 40px rgba(139, 92, 246, 0.8),
+        0 0 60px rgba(236, 72, 153, 0.6);
+      transform: translateY(-2px) scale(1.03);
+      position: relative;
+    }
+
+    .city-select.city-selected::before {
+      opacity: 1;
+      background: radial-gradient(circle, 
+        rgba(0, 217, 255, 0.4) 0%,
+        rgba(139, 92, 246, 0.35) 30%,
+        rgba(236, 72, 153, 0.3) 60%,
+        transparent 80%);
+      animation: spin 15s linear infinite;
+    }
+
+    .city-select.city-selected::after {
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 217, 255, 0.5), 
+        rgba(139, 92, 246, 0.5),
+        rgba(236, 72, 153, 0.5),
+        transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Live Clock Display */
+    .clock-display {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.25rem 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(50px) saturate(200%);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      min-width: 320px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .clock-display::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.1), transparent 70%);
+      animation: spin 15s linear infinite;
+      pointer-events: none;
+    }
+
+    .clock-display:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 50px rgba(0, 217, 255, 0.5);
+      background: rgba(0, 217, 255, 0.08);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .clock-icon {
+      font-size: 2rem;
+      animation: pulse 2s ease-in-out infinite, float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    .clock-time {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+      animation: gradientShift 4s ease infinite;
+      position: relative;
+      z-index: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .clock-date {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Forecast Container */
+    .forecast-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(50px) saturate(200%);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      box-shadow: var(--shadow-card), 0 0 0 1px rgba(0, 217, 255, 0.15);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .forecast-container::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.08), transparent 70%);
+      animation: spin 25s linear infinite;
+      pointer-events: none;
+    }
+
+    .forecast-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .forecast-header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      transition: width 0.8s ease;
+      animation: gradientShift 4s ease infinite;
+    }
+
+    .forecast-container:hover .forecast-header::after {
+      width: 100%;
+    }
+
+    .forecast-city-name {
+      font-size: 3rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 5s ease infinite;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 50px rgba(0, 217, 255, 0.4);
+      position: relative;
+    }
+
+    .forecast-city-name::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60%;
+      height: 4px;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      border-radius: 2px;
+      animation: gradientShift 5s ease infinite;
+      opacity: 0.7;
+    }
+
+    .forecast-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .control-btn {
+      padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 217, 255, 0.12);
+      border: 2px solid rgba(0, 217, 255, 0.3);
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .control-btn::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(0, 217, 255, 0.4);
+      transform: translate(-50%, -50%);
+      transition: width 0.8s, height 0.8s;
+    }
+
+    .control-btn:active::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .control-btn:hover {
+      background: rgba(0, 217, 255, 0.25);
+      border-color: var(--accent);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 217, 255, 0.5);
+      color: var(--accent-hover);
+    }
+
+    .control-btn.playing {
+      background: rgba(0, 217, 255, 0.3);
+      border-color: var(--accent);
+      animation: glow 2s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(0, 217, 255, 0.6);
+    }
+
+    /* Card Grid Styles - New Pattern! */
+    .cards-wrapper {
+      position: relative;
+      z-index: 1;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1rem 0;
+    }
+
+    .cards-wrapper::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    .cards-wrapper::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 10px;
+    }
+
+    .cards-wrapper::-webkit-scrollbar-thumb {
+      background: var(--gradient-primary);
+      border-radius: 10px;
+      border: 2px solid rgba(15, 23, 42, 0.5);
+    }
+
+    .cards-wrapper::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-hover);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .cards-grid::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.03) 50%, transparent 100%),
+        linear-gradient(0deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
+      background-size: 100px 100px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .hour-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(50px) saturate(200%);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 0.6s ease-out backwards;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hour-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      animation: spin 20s linear infinite;
+      pointer-events: none;
+    }
+
+    .hour-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+      animation: gradientShift 4s ease infinite;
+    }
+
+    .hour-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: var(--accent);
+      box-shadow: 0 20px 50px rgba(0, 217, 255, 0.4), 0 0 80px rgba(139, 92, 246, 0.3);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(139, 92, 246, 0.1));
+    }
+
+    .hour-card:hover::before {
+      opacity: 1;
+    }
+
+    .hour-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hour-card.selected {
+      border: 3px solid var(--accent);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(139, 92, 246, 0.2));
+      box-shadow: 0 0 60px rgba(0, 217, 255, 0.6), 0 20px 50px rgba(0, 217, 255, 0.4), inset 0 0 30px rgba(0, 217, 255, 0.2);
+      transform: translateY(-5px) scale(1.05);
+      animation: glow 2s ease-in-out infinite, fadeInUp 0.6s ease-out;
+    }
+
+    .hour-card.selected::before {
+      opacity: 1;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.3), rgba(139, 92, 246, 0.25), transparent 70%);
+    }
+
+    .hour-card.selected::after {
+      transform: scaleX(1);
+    }
+
+    .hour-card:nth-child(1) { animation-delay: 0.05s; }
+    .hour-card:nth-child(2) { animation-delay: 0.1s; }
+    .hour-card:nth-child(3) { animation-delay: 0.15s; }
+    .hour-card:nth-child(4) { animation-delay: 0.2s; }
+    .hour-card:nth-child(5) { animation-delay: 0.25s; }
+    .hour-card:nth-child(6) { animation-delay: 0.3s; }
+    .hour-card:nth-child(7) { animation-delay: 0.35s; }
+    .hour-card:nth-child(8) { animation-delay: 0.4s; }
+    .hour-card:nth-child(n+9) { animation-delay: 0.45s; }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-time {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    .card-temp {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 4s ease infinite;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-body {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-metric {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card-metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card-metric-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-light);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-temp-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      opacity: 0.15;
+      filter: blur(30px);
+      z-index: 0;
+      transition: all 0.5s ease;
+    }
+
+    .hour-card:hover .card-temp-bg {
+      opacity: 0.25;
+      transform: scale(1.2);
+    }
+
+    /* Stop Button */
+    .stop-btn-floating {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4757 0%, #ee5a6f 100%);
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 30px rgba(255, 71, 87, 0.6), 0 0 0 8px rgba(255, 71, 87, 0.2);
+      z-index: 100;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+      backdrop-filter: blur(15px);
+    }
+
+    .stop-btn-floating.visible {
+      display: flex;
+      animation: bounceIn 0.6s ease-out, pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+    }
+
+    .stop-btn-floating:hover {
+      transform: translateY(-50%) scale(1.15) rotate(5deg);
+      box-shadow: 0 8px 40px rgba(255, 71, 87, 0.8), 0 0 0 10px rgba(255, 71, 87, 0.3);
+      background: linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%);
+    }
+
+    .stop-btn-floating:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    td {
+      padding: 1.5rem 2rem;
+      font-size: 1rem;
+      color: var(--text-light);
+      border-right: 1px solid rgba(148, 163, 184, 0.08);
+      position: relative;
+    }
+    
+    td:last-child {
+      border-right: none;
+    }
+
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 5rem;
+      color: var(--text-muted);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      border: 5px solid rgba(0, 217, 255, 0.2);
+      border-top-color: var(--accent);
+      border-right-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+      position: relative;
+    }
+
+    .loading-spinner::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 217, 255, 0.1);
+      border-top-color: var(--accent-hover);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite reverse;
+    }
+
+
+    /* Progress indicator */
+    .play-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      background-size: 200% 200%;
+      width: 0%;
+      transition: width 1s linear;
+      z-index: 1;
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+      animation: gradientShift 3s ease infinite;
+    }
+
+    .forecast-container.playing .play-progress {
+      animation: progressPulse 1.5s ease-in-out infinite, gradientShift 3s ease infinite;
+    }
+
+    @keyframes progressPulse {
+      0%, 100% {
+        opacity: 1;
+        height: 4px;
+      }
+      50% {
+        opacity: 0.8;
+        height: 6px;
+      }
+    }
+
+    /* Protocol Warning */
+    #protocolWarning {
+      background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(238, 90, 111, 0.15));
+      border: 3px solid #ff4757;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      animation: fadeIn 0.6s ease-out, pulse 3s ease-in-out infinite;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(255, 71, 87, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .header-title {
+        font-size: 1.5rem;
+      }
+
+      .main-content {
+        padding: 1.5rem;
+        margin-top: 120px;
+      }
+
+      .city-selector-wrapper {
+        flex-direction: column;
+      }
+
+      .city-select, .clock-display {
+        min-width: 100%;
+      }
+
+      .forecast-controls {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .forecast-city-name {
+        font-size: 2rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+        padding: 0.5rem;
+      }
+
+      .hour-card {
+        padding: 1.25rem;
+      }
+
+      .card-temp {
+        font-size: 2rem;
+      }
+
+      .card-body {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-title">AI Weather Prediction</div>
+    <nav class="header-nav">
+      <a href="intro.html" class="nav-link">Intro</a>
+      <a href="index.html" class="nav-link">Map</a>
+      <a href="hourly.html" class="nav-link">100-Day</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Protocol Warning -->
+    <div id="protocolWarning" style="display: none;">
+      <h2 style="color: #ff4757; margin-bottom: 1rem; font-size: 1.8rem;">⚠️ Wrong Access Method</h2>
+      <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">You're opening this file directly. CSV files won't load this way.</p>
+      <div style="background: rgba(0,0,0,0.4); padding: 2rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+        <strong style="color: var(--accent); display: block; margin-bottom: 1rem; font-size: 1.2rem;">✅ CORRECT WAY:</strong>
+        <div style="margin: 1.25rem 0;">
+          <strong>Step 1:</strong> Open PowerShell in the project folder<br>
+          <code style="background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; color: #4fd1c5; display: inline-block; margin: 0.75rem 0; font-size: 1.1rem;">python -m http.server 8000</code>
+        </div>
+        <div style="margin: 1.25rem 0;">
+          <strong>Step 2:</strong> Click this link:<br>
+          <a href="http://localhost:8000/hourly_24.html" target="_blank" style="font-size: 1.3rem; color: var(--accent); text-decoration: underline; font-weight: 700; display: inline-block; margin-top: 0.75rem;">http://localhost:8000/hourly_24.html</a>
+        </div>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid rgba(255, 71, 87, 0.4); font-size: 1rem; color: var(--text-muted);">
+          <strong>⚠️ Important:</strong> Make sure the server is running from the folder containing hourly_24.html and HOURLY folder!
+        </div>
+      </div>
+    </div>
+
+    <!-- City Selector -->
+    <div class="city-selector">
+      <div class="city-selector-label">Select a City / Town</div>
+      <div class="city-selector-wrapper">
+        <select id="citySelect" class="city-select">
+          <option value="">Loading cities...</option>
+        </select>
+        <div class="clock-display" id="clockDisplay">
+          <div class="clock-icon">🕐</div>
+          <div>
+            <div class="clock-time" id="clockTime">--:--:--</div>
+            <div class="clock-date" id="clockDate">-- -- ----</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forecast Container -->
+    <div class="forecast-container" id="forecastContainer" style="display: none;">
+      <div class="play-progress" id="playProgress"></div>
+      <div class="forecast-header">
+        <div class="forecast-city-name" id="forecastCityName">Select a city</div>
+        <div class="forecast-controls">
+          <button class="control-btn" id="prevBtn">◀ Prev</button>
+          <button class="control-btn" id="nextBtn">Next ▶</button>
+          <button class="control-btn" id="nowBtn">⏰ Now</button>
+          <button class="control-btn" id="playBtn">▶ Play</button>
+          <button class="control-btn" id="exportBtn">⬇ Export</button>
+        </div>
+      </div>
+
+      <div class="cards-wrapper" style="position: relative;">
+        <div class="cards-grid" id="cardsGrid"></div>
+        <button class="stop-btn-floating" id="stopBtn" title="Stop playback">⏹</button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading" id="loadingState">
+      <div class="loading-spinner"></div>
+      <div style="font-size: 1.2rem; font-weight: 600;">Loading forecast data...</div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration
+    const HOURLY_FOLDER = 'HOURLY';
+    let cities = [];
+    let currentCity = null;
+    let rows = [];
+    let headers = [];
+    let visibleCols = [];
+    let selectedIndex = 0;
+    let windowStart = 0;
+    let playTimer = null;
+
+    // DOM Elements
+    const citySelect = document.getElementById('citySelect');
+    const clockTime = document.getElementById('clockTime');
+    const clockDate = document.getElementById('clockDate');
+    const forecastContainer = document.getElementById('forecastContainer');
+    const loadingState = document.getElementById('loadingState');
+    const forecastCityName = document.getElementById('forecastCityName');
+    const cardsGrid = document.getElementById('cardsGrid');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const nowBtn = document.getElementById('nowBtn');
+    const playBtn = document.getElementById('playBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const stopBtn = document.getElementById('stopBtn');
+
+    // Known cities from HOURLY folder structure
+    const KNOWN_CITIES = [
+      'Akron', 'Aliquippa', 'Allegheny_(North_Side)', 'Allentown', 'Altoona', 'Ambler', 'Ambridge',
+      'Annville', 'Archbald', 'Ardmore', 'Baldwin', 'Bath', 'Beaver', 'Beaver_Falls', 'Bedford',
+      'Bellefonte', 'Bellwood', 'Bensalem', 'Bethel_Park', 'Bethlehem', 'Birdsboro', 'Blairsville',
+      'Boalsburg', 'Boswell', 'Boyertown', 'Bradford', 'Brentwood', 'Bristol', 'Brodheadsville',
+      'Broomall', 'Brownsville', 'Bryn_Mawr', 'Buckingham', 'California_(PA)', 'Camden_(NJ,_same_metro)',
+      'Camp_Hill', 'Canonsburg', 'Carbondale', 'Carlisle', 'Carnegie', 'Catasauqua', 'Centre_Hall',
+      'Chalfont', 'Charleroi', 'Cheltenham', 'Chester', 'Clarks_Summit', 'Clearfield', 'Cleona',
+      'Collegeville', 'Columbia', 'Connellsville', 'Conshohocken', 'Coplay', 'Coraopolis', 'Crafton',
+      'Cresson', 'Dallas', 'Dallastown', 'Danville', 'Dauphin', 'Delaware_Water_Gap', 'Dickson_City',
+      'Dormont', 'Douglassville', 'Dover', 'Doylestown', 'Drexel_Hill', 'Drums', 'DuBois', 'Duncansville',
+      'Dunmore', 'East_Stroudsburg', 'Easton', 'Ebensburg', 'Eddystone', 'Edgewood', 'Edinboro',
+      'Eldred', 'Elizabethtown', 'Ellwood_City', 'Emmaus', 'Emporium', 'Enola', 'Ephrata', 'Erie',
+      'Everett', 'Exton', 'Fairview', 'Feasterville-Trevose', 'Fleetwood', 'Folsom', 'Forks',
+      'Fort_Washington', 'Fountain_Hill', 'Freeland', 'Gap', 'Gilbertsville', 'Girard', 'Glenside',
+      'Greensburg', 'Greentree', 'Hamburg', 'Hanover', 'Hanover_Township', 'Harborcreek', 'Harrisburg',
+      'Hatfield', 'Havertown', 'Hazleton', 'Hellertown', 'Hershey', 'Highspire', 'Hollidaysburg',
+      'Homer_City', 'Honesdale', 'Horsham', 'Hughesville', 'Hummelstown', 'Hyndman', 'Indiana',
+      'Intercourse', 'Irwin', 'Jeannette', 'Jenkintown', 'Jermyn', 'Jersey_Shore', 'Jim_Thorpe',
+      'Johnsonburg', 'Johnstown', 'Jonestown', 'King_of_Prussia', 'Kingston', 'Kutztown', 'Lancaster',
+      'Langhorne', 'Lansdale', 'Lansdowne', 'Latrobe', 'Lebanon', 'Lehighton', 'Lemoyne', 'Levittown',
+      'Lewisberry', 'Lewisburg', 'Limerick', 'Lititz', 'Lock_Haven', 'Lower_Saucon', 'Luzerne',
+      'Macungie', 'Malvern', 'Manchester', 'Manheim', 'Marcus_Hook', 'Marietta', 'Masontown',
+      'McAdoo', 'McKees_Rocks', 'McMurray', 'Mechanicsburg', 'Media', 'Middletown', 'Milesburg',
+      'Millcreek', 'Millersville', 'Milton', 'Monaca', 'Monongahela', 'Monroeville', 'Montoursville',
+      'Moon_Township', 'Morrisville', 'Mount_Joy', 'Mount_Pocono', 'Mountain_Top', 'Mt._Lebanon',
+      'Muncy', 'Myerstown', 'Nanticoke', 'Nazareth', 'Nesquehoning', 'New_Britain', 'New_Castle',
+      'New_Cumberland', 'New_Freedom', 'New_Holland', 'New_Stanton', 'Newtown', 'Norristown',
+      'North_East', 'North_Huntingdon', 'North_Wales', 'Northampton', 'Northumberland', 'Olyphant',
+      'Palmer', 'Palmerton', 'Palmyra', 'Paoli', 'Penn_Hills', 'Perkasie', 'Peters_Township',
+      'Philadelphia', 'Philipsburg', 'Phoenixville', 'Pittsburgh', 'Pleasant_Gap', 'Plum', 'Plymouth',
+      'Plymouth_Meeting', 'Pocono_Pines', 'Port_Allegany', 'Port_Matilda', 'Pottstown', 'Prospect_Park',
+      'Punxsutawney', 'Quakertown', 'Quarryville', 'Radnor', 'Reading', 'Red_Lion', 'Richland',
+      'Richlandtown', 'Ridgway', 'Ridley_Park', 'Robinson_Township', 'Saltsburg', 'Saxton',
+      'Saylorsburg', 'Schellsburg', 'Scranton', 'Selinsgrove', 'Sellersville', 'Sewickley',
+      'Shamokin_Dam', 'Sheffield', 'Shillington', 'Shoemakersville', 'Shrewsbury', 'Sinking_Spring',
+      'Smethport', 'Somerset', 'South_Williamsport', 'Spring_Grove', 'Springfield_(Delco)', 'St._Marys',
+      'State_College', 'Steelton', 'Strasburg', 'Stroudsburg', 'Sugarloaf', 'Summit_Hill', 'Sunbury',
+      'Throop', 'Tidioute', 'Tobyhanna', 'Trainer', 'Tyrone', 'Uniontown', 'Upper_Darby',
+      'Upper_St._Clair', 'Villanova', 'Warminster', 'Warren', 'Warrington', 'Washington', 'Waterford',
+      'Wayne', 'Waynesburg', 'Weatherly', 'Wernersville', 'West_Chester', 'West_Reading', 'Westmont',
+      'Whitehall', 'Wilkes-Barre', 'Wilkinsburg', 'Williamsport', 'Willow_Grove', 'Wilson', 'Windber',
+      'Wyomissing', 'Yardley', 'Yeadon', 'York', 'Youngsville'
+    ];
+
+    // Load cities
+    function loadCities() {
+      cities = KNOWN_CITIES.map(city => ({
+        name: city.replace(/_/g, ' ').replace(/\(.*?\)/g, '').trim(),
+        path: city,
+        file: `${city}/hourly.csv`
+      }));
+
+      citySelect.innerHTML = '<option value="">Select a city...</option>';
+      cities.forEach((city, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = city.name;
+        citySelect.appendChild(option);
+      });
+
+      loadingState.style.display = 'none';
+    }
+
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+      });
+      const dateStr = now.toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+      
+      clockTime.textContent = timeStr;
+      clockDate.textContent = dateStr.toUpperCase();
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // CSV Parser
+    function parseCSV(text) {
+      if (!text || text.trim().length === 0) {
+        console.error('CSV text is empty');
+        return { headers: [], rows: [] };
+      }
+
+      const lines = text.trim().split(/\r?\n/).filter(line => line.trim().length > 0);
+      
+      if (lines.length < 2) {
+        console.error('CSV has less than 2 lines. Lines:', lines.length);
+        return { headers: [], rows: [] };
+      }
+      
+      const headers = parseLine(lines[0]).map(h => h.trim().replace(/^["']|["']$/g, ''));
+      console.log('CSV Headers:', headers);
+      
+      if (headers.length === 0) {
+        console.error('No headers found in CSV');
+        return { headers: [], rows: [] };
+      }
+
+      const rows = [];
+      
+      for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        
+        const cols = parseLine(line);
+        if (cols.length === 0) continue;
+        
+        const obj = {};
+        headers.forEach((h, idx) => {
+          let val = (cols[idx] || '').trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          if (/temp|precip|humid|wind|pressure/i.test(h)) {
+            const n = Number(val);
+            obj[h] = Number.isFinite(n) ? n : (val || null);
+          } else {
+            obj[h] = val || '';
+          }
+        });
+        
+        const hasDate = obj.ds || obj.date || obj.timestamp || obj.time;
+        if (hasDate || Object.keys(obj).length > 0) {
+          rows.push(obj);
+        }
+      }
+      
+      console.log(`Parsed ${rows.length} rows from CSV`);
+      if (rows.length > 0) {
+        console.log('First row sample:', rows[0]);
+      }
+      
+      return { headers, rows };
+    }
+
+    function parseLine(line) {
+      const out = [];
+      let cur = '';
+      let inQuotes = false;
+      
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (ch === ',' && !inQuotes) {
+          out.push(cur);
+          cur = '';
+        } else {
+          cur += ch;
+        }
+      }
+      out.push(cur);
+      return out;
+    }
+
+    // Format hour
+    function formatHour(dateValue) {
+      if (!dateValue || dateValue === '' || dateValue === null || dateValue === undefined) {
+        return '--';
+      }
+      try {
+        let dateStr = String(dateValue).trim();
+        if (!dateStr) return '--';
+        
+        let d = new Date(dateStr.replace(' ', 'T'));
+        if (isNaN(d.getTime())) {
+          d = new Date(dateStr);
+        }
+        if (isNaN(d.getTime())) {
+          d = new Date(dateStr.replace(/-/g, '/'));
+        }
+        if (isNaN(d.getTime())) {
+          return dateStr;
+        }
+        return d.toLocaleString('en-US', { 
+          hour: 'numeric', 
+          minute: '2-digit', 
+          hour12: true 
+        });
+      } catch (e) {
+        console.warn('formatHour error:', e, 'for value:', dateValue);
+        return String(dateValue);
+      }
+    }
+
+    // Find nearest index to now
+    function findNearestIndexToNow() {
+      if (!rows.length) return 0;
+      
+      const dateCol = headers.find(h => {
+        const lower = h.toLowerCase();
+        return ['ds', 'date', 'timestamp', 'time', 'datetime', 'ts'].includes(lower);
+      });
+      
+      if (!dateCol) return 0;
+      
+      const now = new Date();
+      let best = 0;
+      let bestDiff = Infinity;
+      
+      rows.forEach((r, i) => {
+        try {
+          const dateValue = r[dateCol];
+          if (!dateValue) return;
+          const dateStr = dateValue.toString().replace(' ', 'T');
+          const d = new Date(dateStr);
+          if (!isNaN(d.getTime())) {
+            const diff = Math.abs(now - d);
+            if (diff < bestDiff) {
+              best = i;
+              bestDiff = diff;
+            }
+          }
+        } catch {}
+      });
+      
+      return best;
+    }
+
+    // Load city data
+    async function loadCity(index) {
+      if (index === null || index === undefined || index === '') return;
+      
+      const city = cities[index];
+      if (!city) return;
+
+      currentCity = city;
+      forecastCityName.textContent = city.name;
+      loadingState.style.display = 'block';
+      forecastContainer.style.display = 'none';
+
+      if (window.location.protocol === 'file:') {
+        loadingState.innerHTML = `
+          <div class="loading-spinner"></div>
+          <div style="margin-top: 1.5rem; padding: 2rem; background: rgba(255, 71, 87, 0.15); border-radius: var(--radius-md); border: 3px solid rgba(255, 71, 87, 0.4); max-width: 700px; margin-left: auto; margin-right: auto;">
+            <strong style="color: #ff4757; font-size: 1.3rem; display: block; margin-bottom: 1.25rem;">⚠️ You must use a web server:</strong>
+            <div style="margin: 1.25rem 0;">
+              <strong>Step 1:</strong> Open PowerShell in the project folder<br>
+              <code style="background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; color: #4fd1c5; display: inline-block; margin: 0.75rem 0; font-size: 1.1rem;">python -m http.server 8000</code>
+            </div>
+            <div style="margin: 1.25rem 0;">
+              <strong>Step 2:</strong> Open in browser:<br>
+              <a href="http://localhost:8000/hourly_24.html" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 700; font-size: 1.2rem; display: inline-block; margin-top: 0.75rem;">http://localhost:8000/hourly_24.html</a>
+            </div>
+            <small style="color: var(--text-muted); margin-top: 0.75rem; display: block; font-size: 1rem;">⚠️ Make sure server is running from the project root folder!</small>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const urlPaths = [
+          `/${HOURLY_FOLDER}/${city.file}`,
+          `${HOURLY_FOLDER}/${city.file}`,
+          `./${HOURLY_FOLDER}/${city.file}`,
+          `../${HOURLY_FOLDER}/${city.file}`
+        ];
+
+        let response = null;
+        let text = null;
+        let lastError = null;
+
+        for (const url of urlPaths) {
+          try {
+            console.log('Trying path:', url);
+            response = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Accept': 'text/csv,text/plain,*/*'
+              },
+              cache: 'no-cache'
+            });
+            
+            if (response.ok) {
+              text = await response.text();
+              console.log('Successfully loaded from:', url);
+              break;
+            }
+          } catch (err) {
+            console.warn('Path failed:', url, err);
+            lastError = err;
+            continue;
+          }
+        }
+
+        if (!text) {
+          throw new Error(`Could not load CSV file. Tried paths: ${urlPaths.join(', ')}. Make sure server is running from project root.`);
+        }
+
+        const parsed = parseCSV(text);
+        
+        console.log('Parsed CSV:', {
+          headersCount: parsed.headers?.length || 0,
+          rowsCount: parsed.rows?.length || 0,
+          headers: parsed.headers,
+          firstRow: parsed.rows?.[0]
+        });
+        
+        if (!parsed.headers || parsed.headers.length === 0) {
+          throw new Error('CSV file has no headers. Please check the file format.');
+        }
+        
+        if (!parsed.rows || parsed.rows.length === 0) {
+          throw new Error(`CSV file has no data rows. Found ${parsed.headers.length} headers but no data.`);
+        }
+        
+        headers = parsed.headers;
+        rows = parsed.rows;
+        
+        const dateCol = headers.find(h => {
+          const lower = h.toLowerCase();
+          return ['ds', 'date', 'timestamp', 'time', 'datetime', 'ts'].includes(lower);
+        });
+        
+        if (dateCol) {
+          rows.sort((a, b) => {
+            try {
+              const dateA = a[dateCol] || '';
+              const dateB = b[dateCol] || '';
+              const dA = new Date(dateA.toString().replace(' ', 'T'));
+              const dB = new Date(dateB.toString().replace(' ', 'T'));
+              if (isNaN(dA.getTime()) || isNaN(dB.getTime())) return 0;
+              return dA - dB;
+            } catch {
+              return 0;
+            }
+          });
+        }
+
+        visibleCols = headers.filter(h => {
+          const lower = h.toLowerCase();
+          const isDateCol = ['ds', 'date', 'timestamp', 'time', 'datetime', 'ts'].includes(lower);
+          return !isDateCol &&
+                 !/^unique_id$/i.test(lower) && 
+                 lower !== 'id' &&
+                 !/weather_condition/i.test(lower) &&
+                 !/weather_emoji/i.test(lower) &&
+                 !/snow/i.test(lower);
+        });
+        
+        if (dateCol) {
+          visibleCols.unshift(dateCol);
+        }
+        
+        if (visibleCols.length === 0 && headers.length > 0) {
+          visibleCols = headers.slice();
+        }
+        
+        console.log('Visible columns:', visibleCols);
+        console.log('Date column:', dateCol);
+        console.log('First row sample keys:', Object.keys(rows[0] || {}));
+
+        selectedIndex = findNearestIndexToNow();
+        windowStart = Math.max(0, selectedIndex - 12);
+
+        renderWindow();
+
+        loadingState.style.display = 'none';
+        forecastContainer.style.display = 'block';
+      } catch (error) {
+        console.error('Error loading city:', error);
+        loadingState.innerHTML = `
+          <div class="loading-spinner"></div>
+          <div style="margin-top: 1.5rem; color: #ff4757; font-weight: 700; font-size: 1.2rem;">Error loading data: ${error.message}</div>
+          <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(0, 217, 255, 0.1); border-radius: var(--radius-md); border: 2px solid rgba(0, 217, 255, 0.3); max-width: 700px; margin-left: auto; margin-right: auto; text-align: left;">
+            <strong style="color: var(--accent); display: block; margin-bottom: 0.75rem; font-size: 1.1rem;">Troubleshooting:</strong>
+            <ul style="list-style: none; padding-left: 0; color: var(--text-muted); line-height: 2;">
+              <li>• Make sure you're using a web server (not file://)</li>
+              <li>• Check that the HOURLY folder exists in the project root</li>
+              <li>• Verify the CSV file exists at: HOURLY/${city.file}</li>
+              <li>• Check browser console (F12) for more details</li>
+            </ul>
+          </div>
+        `;
+      }
+    }
+
+    // Render window as cards
+    function renderWindow() {
+      cardsGrid.innerHTML = '';
+      const end = Math.min(windowStart + 24, rows.length);
+
+      // Find date column and temp column
+      const dateCol = headers.find(h => {
+        const lower = h.toLowerCase();
+        return ['ds', 'date', 'timestamp', 'time', 'datetime', 'ts'].includes(lower);
+      });
+      
+      const tempCol = headers.find(h => {
+        const lower = h.toLowerCase();
+        return /^temp$/i.test(h) || /^temp_c$/i.test(h) || (lower.includes('temp') && !lower.includes('temp_f') && !lower.includes('fahrenheit'));
+      });
+
+      for (let i = windowStart; i < end; i++) {
+        const row = rows[i];
+        const card = document.createElement('div');
+        card.className = 'hour-card';
+        card.dataset.index = i;
+        
+        if (i === selectedIndex) {
+          card.classList.add('selected');
+        }
+
+        // Card Header with Time and Temperature
+        const cardHeader = document.createElement('div');
+        cardHeader.className = 'card-header';
+        
+        const cardTime = document.createElement('div');
+        cardTime.className = 'card-time';
+        if (dateCol && row[dateCol]) {
+          cardTime.textContent = formatHour(row[dateCol]);
+        } else {
+          cardTime.textContent = `Hour ${i + 1}`;
+        }
+        cardHeader.appendChild(cardTime);
+        
+        const cardTemp = document.createElement('div');
+        cardTemp.className = 'card-temp';
+        if (tempCol && Number.isFinite(row[tempCol])) {
+          cardTemp.textContent = row[tempCol].toFixed(1) + '°';
+          
+          // Add temperature background glow
+          const tempBg = document.createElement('div');
+          tempBg.className = 'card-temp-bg';
+          const color = tempToColor(row[tempCol]);
+          tempBg.style.background = color;
+          card.appendChild(tempBg);
+        } else {
+          cardTemp.textContent = '--°';
+        }
+        cardHeader.appendChild(cardTemp);
+        card.appendChild(cardHeader);
+
+        // Card Body with other metrics
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+        
+        // Get other visible columns (excluding date and temp)
+        const otherCols = visibleCols.filter(col => {
+          const lower = col.toLowerCase();
+          return !['ds', 'date', 'timestamp', 'time', 'datetime', 'ts'].includes(lower) &&
+                 col !== tempCol &&
+                 !/^unique_id$/i.test(lower) &&
+                 lower !== 'id';
+        }).slice(0, 6); // Limit to 6 metrics for card size
+        
+        otherCols.forEach(col => {
+          const metric = document.createElement('div');
+          metric.className = 'card-metric';
+          
+          const label = document.createElement('div');
+          label.className = 'card-metric-label';
+          label.textContent = col.replace(/_/g, ' ').toUpperCase();
+          
+          const value = document.createElement('div');
+          value.className = 'card-metric-value';
+          
+          let exactColName = col;
+          const headerIndex = headers.findIndex(h => 
+            h === col || h.toLowerCase() === col.toLowerCase()
+          );
+          if (headerIndex !== -1) {
+            exactColName = headers[headerIndex];
+          }
+          
+          const val = row[exactColName];
+          if (Number.isFinite(val)) {
+            value.textContent = val.toFixed(2);
+          } else {
+            value.textContent = val || '--';
+          }
+          
+          metric.appendChild(label);
+          metric.appendChild(value);
+          cardBody.appendChild(metric);
+        });
+        
+        card.appendChild(cardBody);
+
+        // Click handler
+        card.addEventListener('click', () => {
+          selectedIndex = Number(card.dataset.index);
+          if (selectedIndex < windowStart) {
+            windowStart = Math.max(0, selectedIndex);
+          }
+          if (selectedIndex >= windowStart + 24) {
+            windowStart = Math.max(0, selectedIndex - 23);
+          }
+          renderWindow();
+        });
+
+        cardsGrid.appendChild(card);
+      }
+
+      const selected = cardsGrid.querySelector('.hour-card.selected');
+      if (selected) {
+        selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        if (playTimer && stopBtn) {
+          const updateStopButtonPosition = () => {
+            const rect = selected.getBoundingClientRect();
+            const cardsWrapper = document.querySelector('.cards-wrapper');
+            if (cardsWrapper) {
+              const wrapperRect = cardsWrapper.getBoundingClientRect();
+              const relativeTop = rect.top - wrapperRect.top + (rect.height / 2);
+              stopBtn.style.top = `${relativeTop}px`;
+              stopBtn.classList.add('visible');
+            }
+          };
+          
+          setTimeout(updateStopButtonPosition, 300);
+          requestAnimationFrame(updateStopButtonPosition);
+        }
+      } else if (stopBtn && !playTimer) {
+        stopBtn.classList.remove('visible');
+      }
+    }
+
+    // Temperature to color
+    function tempToColor(t) {
+      const min = -20, max = 100;
+      const v = Math.max(min, Math.min(max, t));
+      const p = (v - min) / (max - min);
+      const r = Math.round(20 + 235 * p);
+      const g = Math.round(40 + 180 * (1 - Math.abs(p - 0.5)));
+      const b = Math.round(140 - 120 * p);
+      return `linear-gradient(135deg, rgba(${r},${g},${b},0.95), rgba(${Math.max(0, r-30)},${Math.max(0, g-30)},${Math.max(0, b-30)},0.8))`;
+    }
+
+    // Draw mini chart
+    function drawMiniChart(canvas, currentVal, allRows, start, end, colName) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+      
+      const contextValues = [];
+      for (let i = Math.max(0, start); i < Math.min(allRows.length, end); i++) {
+        const val = allRows[i][colName];
+        if (Number.isFinite(val)) contextValues.push(val);
+      }
+      
+      if (contextValues.length < 2) return;
+      
+      const min = Math.min(...contextValues);
+      const max = Math.max(...contextValues);
+      const range = max - min || 1;
+      
+      ctx.clearRect(0, 0, W, H);
+      
+      ctx.beginPath();
+      contextValues.forEach((v, i) => {
+        const x = (i / Math.max(1, contextValues.length - 1)) * (W - 4) + 2;
+        const y = H - 3 - ((v - min) / range) * (H - 6);
+        if (i === 0) {
+          ctx.moveTo(x, H - 3);
+          ctx.lineTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      ctx.lineTo((contextValues.length - 1) / Math.max(1, contextValues.length - 1) * (W - 4) + 2, H - 3);
+      ctx.closePath();
+      
+      const fillGradient = ctx.createLinearGradient(0, 0, 0, H);
+      fillGradient.addColorStop(0, 'rgba(0, 217, 255, 0.3)');
+      fillGradient.addColorStop(1, 'rgba(0, 217, 255, 0.05)');
+      ctx.fillStyle = fillGradient;
+      ctx.fill();
+      
+      ctx.beginPath();
+      contextValues.forEach((v, i) => {
+        const x = (i / Math.max(1, contextValues.length - 1)) * (W - 4) + 2;
+        const y = H - 3 - ((v - min) / range) * (H - 6);
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      
+      ctx.strokeStyle = 'rgba(0, 217, 255, 0.9)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      const currentIdxInWindow = selectedIndex - start;
+      if (currentIdxInWindow >= 0 && currentIdxInWindow < contextValues.length) {
+        const x = (currentIdxInWindow / Math.max(1, contextValues.length - 1)) * (W - 4) + 2;
+        const y = H - 3 - ((currentVal - min) / range) * (H - 6);
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 217, 255, 1)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+
+    // Event Listeners
+    citySelect.addEventListener('change', (e) => {
+      const value = e.target.value;
+      // Add visual feedback when city is selected
+      if (value && value !== '') {
+        citySelect.classList.add('city-selected');
+        // Add a brief celebration animation
+        citySelect.style.animation = 'bounceIn 0.6s ease-out';
+        setTimeout(() => {
+          citySelect.style.animation = '';
+        }, 600);
+      } else {
+        citySelect.classList.remove('city-selected');
+      }
+      loadCity(Number(value));
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (selectedIndex <= 0) return;
+      selectedIndex = Math.max(0, selectedIndex - 1);
+      if (selectedIndex < windowStart) {
+        windowStart = Math.max(0, windowStart - 1);
+      }
+      renderWindow();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (selectedIndex >= rows.length - 1) return;
+      selectedIndex = Math.min(rows.length - 1, selectedIndex + 1);
+      if (selectedIndex >= windowStart + 24) {
+        windowStart = Math.min(rows.length - 24, windowStart + 1);
+      }
+      renderWindow();
+    });
+
+    nowBtn.addEventListener('click', () => {
+      selectedIndex = findNearestIndexToNow();
+      windowStart = Math.max(0, selectedIndex - 12);
+      renderWindow();
+    });
+
+    playBtn.addEventListener('click', () => {
+      if (playTimer) {
+        clearInterval(playTimer);
+        playTimer = null;
+        playBtn.textContent = '▶ Play';
+        playBtn.classList.remove('playing');
+        forecastContainer.classList.remove('playing');
+        if (stopBtn) stopBtn.classList.remove('visible');
+        const progressBar = document.getElementById('playProgress');
+        if (progressBar) progressBar.style.width = '0%';
+      } else {
+        playBtn.textContent = '⏸ Pause';
+        playBtn.classList.add('playing');
+        forecastContainer.classList.add('playing');
+        playTimer = setInterval(() => {
+          if (selectedIndex < rows.length - 1) {
+            selectedIndex++;
+          } else {
+            selectedIndex = 0;
+          }
+          if (selectedIndex >= windowStart + 24) {
+            windowStart = Math.min(rows.length - 24, windowStart + 1);
+          }
+          
+          const progress = ((selectedIndex + 1) / rows.length) * 100;
+          const progressBar = document.getElementById('playProgress');
+          if (progressBar) progressBar.style.width = `${progress}%`;
+          
+          renderWindow();
+        }, 1000);
+        renderWindow();
+      }
+    });
+
+    stopBtn.addEventListener('click', () => {
+      if (playTimer) {
+        clearInterval(playTimer);
+        playTimer = null;
+        playBtn.textContent = '▶ Play';
+        playBtn.classList.remove('playing');
+        stopBtn.classList.remove('visible');
+      }
+    });
+
+    exportBtn.addEventListener('click', () => {
+      if (!rows.length) return;
+      const end = Math.min(windowStart + 24, rows.length);
+      const outRows = [headers.join(',')];
+      
+      for (let i = windowStart; i < end; i++) {
+        const row = headers.map(h => {
+          let val = rows[i][h];
+          if (val === null || val === undefined) val = '';
+          if (typeof val === 'string' && val.includes(',')) {
+            return '"' + val.replace(/"/g, '""') + '"';
+          }
+          return val;
+        }).join(',');
+        outRows.push(row);
+      }
+      
+      const blob = new Blob([outRows.join('\n')], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${currentCity.name.replace(/\s+/g, '_')}_hourly_window.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    if (window.location.protocol === 'file:') {
+      document.getElementById('protocolWarning').style.display = 'block';
+    }
+
+    const cardsWrapper = document.querySelector('.cards-wrapper');
+    if (cardsWrapper) {
+      cardsWrapper.addEventListener('scroll', () => {
+        if (playTimer && stopBtn) {
+          const selected = cardsGrid.querySelector('.hour-card.selected');
+          if (selected) {
+            const rect = selected.getBoundingClientRect();
+            const wrapperRect = cardsWrapper.getBoundingClientRect();
+            const relativeTop = rect.top - wrapperRect.top + (rect.height / 2);
+            stopBtn.style.top = `${relativeTop}px`;
+          }
+        }
+      });
+    }
+
+    loadCities();
+  </script>
+</body>
+</html>

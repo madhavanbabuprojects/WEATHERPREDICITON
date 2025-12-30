@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Certifications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: CERTIFICATIONS</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: CERTS_MODULE</div>
+        <div class="boot-line">> source: AZURE / AWS / RH / VMWARE / IBM</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">CERTS VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK (CERTS ACTIVE) -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item dock-active" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>certs-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> loading: CERTIFICATION_INVENTORY …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- MAIN CERTS GRID -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Certification Inventory — Cloud, Infra &amp; Data</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Summary of major certifications across Microsoft Azure, AWS, Red Hat, VMware, IBM Power / AIX,
+          and data / analytics. This page is designed to read like a certification control panel.
+        </p>
+
+        <div class="certs-grid">
+
+          <!-- Microsoft Azure -->
+          <div class="cert-card">
+            <h3>Microsoft Azure</h3>
+            <ul>
+              <li>Azure Solutions Architect Expert</li>
+              <li>Azure DevOps Engineer Expert</li>
+              <li>Azure Security Engineer Associate</li>
+              <li>Azure Administrator Associate</li>
+              <li>Azure Data Engineer Associate</li>
+              <li>Fundamentals: AZ-900 (Azure), DP-900 (Data), AI / security fundamentals</li>
+            </ul>
+          </div>
+
+          <!-- AWS -->
+          <div class="cert-card">
+            <h3>Amazon Web Services</h3>
+            <ul>
+              <li>AWS Certified Solutions Architect – Associate</li>
+              <li>AWS Certified Solutions Architect – Professional</li>
+              <li>AWS cloud trainings focused on migration and hybrid architectures</li>
+            </ul>
+          </div>
+
+          <!-- Red Hat -->
+          <div class="cert-card">
+            <h3>Red Hat</h3>
+            <ul>
+              <li>RHCSA – Red Hat Certified System Administrator</li>
+              <li>RHCE – Red Hat Certified Engineer</li>
+              <li>Red Hat Specialist in Ansible Automation</li>
+              <li>Red Hat Specialist in OpenShift</li>
+            </ul>
+          </div>
+
+          <!-- VMware -->
+          <div class="cert-card">
+            <h3>VMware &amp; Virtualization</h3>
+            <ul>
+              <li>VMware vSphere / vCenter administration</li>
+              <li>VMware Certified Professional – Data Center Virtualization (VCP-DCV)</li>
+              <li>Hands-on experience with vSAN, SRM, and Azure VMware Solution (AVS)</li>
+            </ul>
+          </div>
+
+          <!-- IBM / AIX -->
+          <div class="cert-card">
+            <h3>IBM Power &amp; AIX</h3>
+            <ul>
+              <li>IBM Certified System Administrator – AIX</li>
+              <li>IBM Certified Specialist – PowerHA &amp; HACMP</li>
+              <li>Training in virtualization, advanced configuration, and Power systems</li>
+            </ul>
+          </div>
+
+          <!-- Data, BI & Other -->
+          <div class="cert-card">
+            <h3>Data, BI &amp; Other Credentials</h3>
+            <ul>
+              <li>Azure Data Engineering</li>
+              <li>Power BI and Tableau visualization</li>
+              <li>ITIL / service management exposure through large enterprise programs</li>
+              <li>Multiple internal CoE and OEM trainings (IBM, Microsoft, Red Hat)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL TRAINING SECTION -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Professional Training — Comprehensive Skills Development</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Extensive professional training across cloud platforms, data engineering, UNIX/AIX systems, 
+          virtualization, and DevOps automation technologies.
+        </p>
+
+        <div class="certs-grid">
+          <div class="cert-card">
+            <h3>Cloud Platform Training</h3>
+            <ul>
+              <li>Azure Data Engineering</li>
+              <li>Azure Cloud</li>
+              <li>AWS Cloud</li>
+              <li>Google Cloud</li>
+              <li>IBM Cloud</li>
+            </ul>
+          </div>
+
+          <div class="cert-card">
+            <h3>AIX &amp; IBM Power Systems</h3>
+            <ul>
+              <li>COE (Centre of excellence – AIX)</li>
+              <li>AU14 AIX5L System Administration – Implementation</li>
+              <li>AU16 AIX5L System Administration II - Problem Determination</li>
+              <li>AU54 HACMP System Administration – Planning &amp; Implementation</li>
+              <li>AIX Virtualization and Advanced Configuration Techniques</li>
+              <li>IBM PureFlex for Power systems</li>
+              <li>Linux On Power (LX21)</li>
+              <li>Power KVM (VX53)</li>
+            </ul>
+          </div>
+
+          <div class="cert-card">
+            <h3>Linux &amp; Virtualization</h3>
+            <ul>
+              <li>Red Hat OpenStack Cloud</li>
+              <li>Red Hat Certified Specialist in Ansible Automation</li>
+              <li>Red Hat OpenShift</li>
+              <li>Veritas cluster for AIX/LINUX</li>
+              <li>Linux On Power (LX21)</li>
+              <li>Power KVM (VX53)</li>
+            </ul>
+          </div>
+
+          <div class="cert-card">
+            <h3>Storage &amp; Infrastructure</h3>
+            <ul>
+              <li>Flash System Technical Solutions</li>
+              <li>SAN storage management</li>
+              <li>Converged infrastructure</li>
+            </ul>
+          </div>
+
+          <div class="cert-card">
+            <h3>DevOps &amp; Automation</h3>
+            <ul>
+              <li>Terraform</li>
+              <li>Azure DevOps</li>
+              <li>Red Hat Certified Specialist in Ansible Automation</li>
+              <li>Jenkins Pipeline configuration</li>
+            </ul>
+          </div>
+
+          <div class="cert-card">
+            <h3>Data &amp; Visualization</h3>
+            <ul>
+              <li>Azure Data Engineering</li>
+              <li>Power BI visualization</li>
+              <li>Tableau visualization</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE / BADGE PROGRESSION -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Certification Timeline — Progression</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          How your certification profile evolved over time — from UNIX and AIX specialization to
+          multi-cloud, data, and DevOps.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Early Career — UNIX &amp; AIX Specialization</h3>
+              <div class="timeline-date">AIX / IBM Power Era</div>
+              <p>
+                Focused on IBM AIX, PowerHA, virtualization, and advanced configuration. Built the
+                foundation for data center, clustering, and high availability work.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Red Hat &amp; VMware — Enterprise Virtualization</h3>
+              <div class="timeline-date">Linux / Virtualization</div>
+              <p>
+                Expanded into Red Hat Linux, Ansible, and VMware virtualization, supporting large
+                DC migration and consolidation programs across global enterprises.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Azure &amp; AWS — Cloud Architecture Track</h3>
+              <div class="timeline-date">Multi-Cloud</div>
+              <p>
+                Earned multiple Azure expert certifications and AWS architecture certifications,
+                transitioning from pure infrastructure into cloud solution architecture and migrations.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Data &amp; DevOps — Platform Engineering</h3>
+              <div class="timeline-date">Cloud Data &amp; Pipelines</div>
+              <p>
+                Added data engineering, DevOps, and visualization trainings to support modern data
+                platforms built with ADF, Databricks, Snowflake, and Azure DevOps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: CERTIFICATIONS • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

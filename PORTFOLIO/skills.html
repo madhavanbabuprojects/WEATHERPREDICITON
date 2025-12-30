@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Skills</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: SKILLS</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: SKILLS_MODULE</div>
+        <div class="boot-line">> map: CLOUD / DATA / DEVOPS / INFRA</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">SKILLS VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK (SKILLS ACTIVE) -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item dock-active" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>skills-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> rendering: SKILLS_TOPOLOGY …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- SKILLS MAP WINDOW -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Skills Topology — Core Domains</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          High-level map of your core skill clusters — Cloud, Data, DevOps, and Infrastructure — built
+          from your resume and project history.
+        </p>
+
+        <div class="skills-map">
+          <svg class="skills-lines" viewBox="0 0 300 300" preserveAspectRatio="none">
+            <line x1="150" y1="150" x2="75" y2="60"></line>
+            <line x1="150" y1="150" x2="225" y2="60"></line>
+            <line x1="150" y1="150" x2="75" y2="240"></line>
+            <line x1="150" y1="150" x2="225" y2="240"></line>
+          </svg>
+
+          <div class="skills-node center">
+            <div class="skills-node-title">Madhavan</div>
+            <div class="skills-node-sub">Cloud · Data · DevOps · Infra</div>
+          </div>
+
+          <div class="skills-node branch cloud">
+            <div class="skills-node-title">Cloud</div>
+            <div class="skills-tags">
+              <span>Azure</span><span>AWS</span><span>GCP</span><span>Private Cloud</span>
+            </div>
+          </div>
+
+          <div class="skills-node branch data">
+            <div class="skills-node-title">Data</div>
+            <div class="skills-tags">
+              <span>ADF</span><span>Databricks</span><span>Snowflake</span><span>Synapse</span>
+            </div>
+          </div>
+
+          <div class="skills-node branch devops">
+            <div class="skills-node-title">DevOps</div>
+            <div class="skills-tags">
+              <span>Azure DevOps</span><span>Jenkins</span><span>Terraform</span><span>Ansible</span>
+            </div>
+          </div>
+
+          <div class="skills-node branch infra">
+            <div class="skills-node-title">Infra / OS</div>
+            <div class="skills-tags">
+              <span>AIX</span><span>Linux</span><span>Windows</span><span>VMware</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED SKILLS MATRIX WINDOW -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Skills Matrix — Detailed Breakdown</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="summary-grid">
+          <!-- Cloud Platforms -->
+          <div class="summary-card">
+            <h3>Cloud Platforms</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>Microsoft Azure — IaaS, PaaS, AVS, ASR, Azure Backup, Monitor</li>
+              <li>AWS — EC2, VPC, S3, RDS, IAM, CloudWatch</li>
+              <li>Google Cloud Platform — core services, compute &amp; storage</li>
+              <li>Hybrid cloud — ExpressRoute, VPN, hub-and-spoke, on-prem integration</li>
+            </ul>
+          </div>
+
+          <!-- Data & Analytics -->
+          <div class="summary-card">
+            <h3>Data &amp; Analytics</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>Azure Data Factory — pipelines, triggers, linked services, data flows</li>
+              <li>Azure Databricks — notebooks, Spark jobs, Delta Lake</li>
+              <li>Snowflake — warehousing, ELT patterns, role-based security</li>
+              <li>Synapse, SQL Server, Oracle, DB2, Hadoop/HDFS, Kafka basics</li>
+            </ul>
+          </div>
+
+          <!-- DevOps & Automation -->
+          <div class="summary-card">
+            <h3>DevOps &amp; Automation</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>Azure DevOps — repos, pipelines, release management</li>
+              <li>Jenkins — CI/CD for infra and application deployments</li>
+              <li>Terraform — IaC for Azure and multi-cloud environments</li>
+              <li>Ansible / Ansible Tower — configuration, patching, provisioning</li>
+              <li>ARM templates, shell scripting, PowerShell automation</li>
+            </ul>
+          </div>
+
+          <!-- Infrastructure & OS -->
+          <div class="summary-card">
+            <h3>Infrastructure &amp; Operating Systems</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>IBM AIX — LPAR/VIOS, PowerHA, virtualization, advanced tuning</li>
+              <li>Linux — RHEL, SUSE, Ubuntu; system admin and operations</li>
+              <li>Windows Server — AD, DNS, file/print, clustering basics</li>
+              <li>VMware vSphere, vSAN, NSX; Azure VMware Solution (AVS)</li>
+              <li>Storage &amp; backup — SAN, NAS, replication, DR runbooks</li>
+            </ul>
+          </div>
+
+          <!-- Networking & Security -->
+          <div class="summary-card">
+            <h3>Networking &amp; Security</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>VNETs, subnets, NSGs, firewalls, routing tables</li>
+              <li>ExpressRoute, VPN gateways, hybrid connectivity</li>
+              <li>Identity &amp; access — Azure AD, RBAC, IAM, key management</li>
+              <li>Security tooling — Defender, Sentinel basics, vulnerability handling</li>
+            </ul>
+          </div>
+
+          <!-- Monitoring, Tools & Soft Skills -->
+          <div class="summary-card">
+            <h3>Monitoring, Tools &amp; Soft Skills</h3>
+            <ul style="font-size:13px;color:var(--text-muted);">
+              <li>Azure Monitor, Log Analytics, Grafana / dashboards</li>
+              <li>ITSM / ticketing — ServiceNow, incident &amp; problem management</li>
+              <li>Documentation — HLD/LLD, runbooks, migration playbooks</li>
+              <li>Customer-facing communication with architects, CIOs, and business teams</li>
+              <li>Mentoring, leading small engineering teams, onshore–offshore coordination</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL SNAPSHOT WINDOW (OPTIONAL LOGOS) -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Tool Snapshot — Visual Stack</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Quick visual view of a few core environments you operate in, using the same OS images.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <img src="images/AIX.png" alt="AIX" style="width:56px;height:56px;object-fit:contain;">
+            <span style="font-size:11px;color:var(--text-muted);">AIX / IBM Power</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <img src="images/Linux.jpg" alt="Linux" style="width:56px;height:56px;object-fit:contain;border-radius:8px;">
+            <span style="font-size:11px;color:var(--text-muted);">Linux</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <img src="images/Windows.png" alt="Windows" style="width:56px;height:56px;object-fit:contain;border-radius:8px;">
+            <span style="font-size:11px;color:var(--text-muted);">Windows</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <img src="images/Vmare.webp" alt="VMware" style="width:56px;height:56px;object-fit:contain;border-radius:8px;">
+            <span style="font-size:11px;color:var(--text-muted);">VMware / AVS</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <img src="images/Unix.avif" alt="Unix" style="width:56px;height:56px;object-fit:contain;border-radius:8px;">
+            <span style="font-size:11px;color:var(--text-muted);">UNIX Family</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: SKILLS • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

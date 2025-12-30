@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Madhavan Babu</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT / LOADING SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Initializing system …</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: MADHAVAN_BABU_SYSTEM</div>
+        <div class="boot-line">> role: CLOUD_ARCHITECT / DATA_ENGINEER</div>
+        <div class="boot-line">> location: LANSDALE_PA_US</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING_MODULES …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP OS STATUS BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">SYSTEM ONLINE</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- LEFT DOCK / NAVIGATION -->
+  <nav class="os-dock">
+    <a class="dock-item dock-active" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- SMALL TERMINAL WIDGET -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>system-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> ARCH_23 :: MADHAVAN_BABU</div>
+      <div>> role: CLOUD_SOLUTIONS_ARCHITECT</div>
+      <div>> status: ONLINE</div>
+    </div>
+  </div>
+
+  <!-- MAIN DESKTOP AREA -->
+  <main class="desktop">
+
+    <!-- HERO WINDOW -->
+    <section id="hero" class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Dashboard — System Overview</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body hero-body">
+        <div class="hero-left">
+          <div class="hero-label">NODE_01 / PRIMARY_PROFILE</div>
+          <h1 class="hero-name">Madhavan Babu</h1>
+
+          <div class="hero-rotating">
+            <span id="hero-rotating-text"></span>
+          </div>
+
+          <p class="hero-desc">
+            Senior Azure Cloud Solutions Architect &amp; Data Engineering Professional with 23+ years
+            leading cloud, data, and infrastructure transformation across Azure, AWS, GCP, VMware, and UNIX ecosystems.
+          </p>
+
+          <div class="hero-spec">
+            <div class="spec-item">
+              <span class="spec-label">VERSION</span>
+              <span class="spec-value">v23.0</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">LOCATION</span>
+              <span class="spec-value">Lansdale, PA, USA</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">STATUS</span>
+              <span class="spec-value status-online">AVAILABLE FOR CLOUD / DATA PROJECTS</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="Madhavan Resume.pdf" target="_blank" class="btn btn-gold">Download Resume</a>
+            <a href="mailto:madhavan.bb@gmail.com" class="btn btn-outline">Email Me</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="blueprint-card">
+            <div class="blueprint-grid"></div>
+            <div class="bp-label top-left">ARCH_23 • CLOUD / DATA</div>
+            <div class="bp-label bottom-right">SYS-ID: MB-1984</div>
+            <div class="bp-box bp-main">
+              <div class="bp-title">SYSTEM PROFILE</div>
+              <ul class="bp-list">
+                <li>Cloud: Azure, AWS, GCP</li>
+                <li>Data: ADF, Databricks, Snowflake</li>
+                <li>Infra: UNIX, VMware, IBM Power</li>
+                <li>DevOps: Azure DevOps, Terraform, Ansible</li>
+              </ul>
+            </div>
+            <div class="bp-box small" style="top: 6%; right: 6%;">
+  <div class="bp-caption">DC MIGRATIONS</div>
+  <div class="bp-small-text">1500+ workloads</div>
+</div>
+
+            <div class="bp-box small" style="bottom: 12%; left: 10%;">
+              <div class="bp-caption">CERTIFIED</div>
+              <div class="bp-small-text">Azure / AWS / RH / IBM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENT LOGO TRAIN -->
+    <section id="clients" class="window reveal clients-window">
+  <div class="window-header">
+    <div class="window-title">Client Landscape — Cloud &amp; Enterprise Engagements</div>
+    <div class="window-controls">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+  </div>
+
+  <div class="window-body clients-body">
+    <p class="clients-intro">
+      Selected organizations and platforms where ARCH_23 expertise has been applied across
+      cloud, data, infrastructure, and transformation programs.
+    </p>
+
+    <div class="client-marquee-container">
+      <div class="client-marquee">
+        <div class="client-track">
+          <!-- LOOP 1 -->
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/AIX.png" alt="IBM AIX">
+            </div>
+            <span class="logo-label">IBM AIX</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Linux.jpg" alt="Linux">
+            </div>
+            <span class="logo-label">Linux</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Windows.png" alt="Windows">
+            </div>
+            <span class="logo-label">Windows</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/aws.png" alt="Amazon Web Services">
+            </div>
+            <span class="logo-label">AWS</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/gcp.jpg" alt="Google Cloud Platform">
+            </div>
+            <span class="logo-label">GCP</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/hadoop.png" alt="Hadoop">
+            </div>
+            <span class="logo-label">Hadoop</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/sql.jfif" alt="SQL &amp; Databases">
+            </div>
+            <span class="logo-label">SQL Platforms</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/devops.jpeg" alt="DevOps Tooling">
+            </div>
+            <span class="logo-label">DevOps</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Vmare.webp" alt="VMware">
+            </div>
+            <span class="logo-label">VMware</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Unilever.avif" alt="Unilever">
+            </div>
+            <span class="logo-label">Unilever</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/AstraZeneca.webp" alt="AstraZeneca">
+            </div>
+            <span class="logo-label">AstraZeneca</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Rogers Communication.webp" alt="Rogers Communications">
+            </div>
+            <span class="logo-label">Rogers</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Somos.png" alt="Somos">
+            </div>
+            <span class="logo-label">Somos</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/msag.jpeg" alt="MSAG / IQVIA">
+            </div>
+            <span class="logo-label">MSAG / IQVIA</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Unix.avif" alt="UNIX">
+            </div>
+            <span class="logo-label">UNIX</span>
+          </div>
+
+          <!-- LOOP 2 (duplicate for seamless infinite scroll) -->
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/AIX.png" alt="IBM AIX">
+            </div>
+            <span class="logo-label">IBM AIX</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Linux.jpg" alt="Linux">
+            </div>
+            <span class="logo-label">Linux</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/Windows.png" alt="Windows">
+            </div>
+            <span class="logo-label">Windows</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/aws.png" alt="Amazon Web Services">
+            </div>
+            <span class="logo-label">AWS</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/gcp.jpg" alt="Google Cloud Platform">
+            </div>
+            <span class="logo-label">GCP</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/hadoop.png" alt="Hadoop">
+            </div>
+            <span class="logo-label">Hadoop</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/sql.jfif" alt="SQL &amp; Databases">
+            </div>
+            <span class="logo-label">SQL Platforms</span>
+          </div>
+
+          <div class="client-logo-item">
+            <div class="logo-wrapper">
+              <img src="images/devops.jpeg" alt="DevOps Tooling">
+            </div>
+            <span class="logo-label">DevOps</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee-fade-left"></div>
+      <div class="marquee-fade-right"></div>
+    </div>
+  </div>
+</section>
+
+    <!-- SUMMARY WINDOW -->
+    <section id="summary" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Professional Summary</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          I am a dynamic and accomplished IT professional with over 23 years of experience across
+          cloud infrastructure, data engineering, DevOps, and large-scale digital transformation.
+          I specialize in multi-cloud architectures, data platforms, and mission-critical migrations.
+        </p>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>Cloud Architecture</h3>
+            <p>
+              Designed and implemented IaaS, PaaS, and hybrid solutions on Azure, AWS, and GCP,
+              including Azure Landing Zones, AVS, Azure Site Recovery, and modern migration patterns.
+            </p>
+          </div>
+          <div class="summary-card">
+            <h3>Data &amp; Analytics</h3>
+            <p>
+              Hands-on with ADF, Databricks, Snowflake, Synapse, Hadoop, Spark, Kafka, and Delta Lake
+              to build scalable ELT/ETL pipelines and analytics ecosystems.
+            </p>
+          </div>
+          <div class="summary-card">
+            <h3>DevOps &amp; Automation</h3>
+            <p>
+              Azure DevOps, Jenkins, Terraform, Ansible, ARM templates, and container platforms
+              (AKS, Docker, OpenShift) to automate infrastructure and delivery.
+            </p>
+          </div>
+          <div class="summary-card">
+            <h3>Leadership &amp; Transformation</h3>
+            <p>
+              Transition and transformation lead for global DC builds, consolidations, UNIX/VMware
+              transitions, and enterprise-scale cloud programs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS WINDOW -->
+    <section id="projects" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Key Projects — Enterprise Engagements</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro" style="margin-bottom: 16px;">
+          Selected large-scale cloud, data, and infrastructure transformation programs across healthcare, 
+          life sciences, financial services, telecom, and enterprise clients.
+        </p>
+        <div class="cards-grid">
+          <article class="project-card">
+            <h3>HCS – Healthcare Compute Solution (IQVIA)</h3>
+            <p class="project-role">Azure Cloud Solutions Architect · 2022–Present</p>
+            <p>
+              Azure IaaS &amp; PaaS architecture for product &amp; engineering teams. Quarterly data 
+              refresh using ADF pipeline for healthcare analytics platform.
+            </p>
+            <div class="project-tags">
+              <span>Azure</span><span>ADF</span><span>Landing Zones</span><span>IaaS</span><span>PaaS</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>CSL – Financial Group (IQVIA)</h3>
+            <p class="project-role">Azure Cloud Solutions Architect</p>
+            <p>
+              Azure platform solution for Archive Solution using IaaS &amp; PaaS components, designed 
+              for staging sites with Azure AD Domain Services &amp; Virtual Networks connectivity.
+            </p>
+            <div class="project-tags">
+              <span>Azure</span><span>Archive</span><span>IaaS</span><span>PaaS</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>Syneos Health – 1500+ Workload Migration</h3>
+            <p class="project-role">Solutions Architect · HCL America</p>
+            <p>
+              Azure Landing Zone and Azure VMware Solution (AVS) for migrating 1500+ UNIX/Windows 
+              workloads from globally distributed DC's.
+            </p>
+            <div class="project-tags">
+              <span>AVS</span><span>Landing Zone</span><span>Migration</span><span>Azure</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>CNO – Financial Group (HCL)</h3>
+            <p class="project-role">Compute Architect · Current Project</p>
+            <p>
+              Cisco UCSM and VMware design/build and migration solutions to migrate workloads (Unix 
+              and Windows) to new data centers using SRM.
+            </p>
+            <div class="project-tags">
+              <span>VMware</span><span>SRM</span><span>Cisco UCSM</span><span>Migration</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>BCBSRI – Blue Cross Blue Shield RI</h3>
+            <p class="project-role">Solutions Architect · HCL</p>
+            <p>
+              Azure Landing Zone design and setup for migrating 800+ Workloads (UNIX and Windows) 
+              for globally distributed DC's.
+            </p>
+            <div class="project-tags">
+              <span>Azure</span><span>Landing Zone</span><span>800+ Workloads</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>Smith &amp; Nephew – 800+ Workload Migration</h3>
+            <p class="project-role">Solutions Architect · HCL</p>
+            <p>
+              Azure Landing Zone design and setup for migrating 800+ Workloads (UNIX and Windows) 
+              for globally distributed DC's.
+            </p>
+            <div class="project-tags">
+              <span>Azure</span><span>Landing Zone</span><span>Migration</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>PayPal – 500+ Workload Migration</h3>
+            <p class="project-role">Solutions Architect · HCL</p>
+            <p>
+              Designed and setup Azure Site Recovery and Azure Migrate. Migrated 500+ various 
+              Workloads for globally distributed DC's.
+            </p>
+            <div class="project-tags">
+              <span>Azure Site Recovery</span><span>Azure Migrate</span><span>500+ Workloads</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>Rogers Communications – DC Build</h3>
+            <p class="project-role">UNIX/VMware Architect · HCL</p>
+            <p>
+              Transition, Build Data Center, Data Center Migration and maintain large enterprise 
+              infrastructure with 3000+ UNIX/VMware/Windows Storage running business critical 
+              Canadian communications project.
+            </p>
+            <div class="project-tags">
+              <span>DC Migration</span><span>3000+ Workloads</span><span>UNIX</span><span>VMware</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>AstraZeneca – Global DC Transformation</h3>
+            <p class="project-role">UNIX SME · HCL Singapore</p>
+            <p>
+              Data Center Setup, Migration and maintain large enterprise infrastructure with 3000+ 
+              AIX/LINUX/Windows running business critical project. Controlled two huge Datacenters 
+              in Singapore and Sweden.
+            </p>
+            <div class="project-tags">
+              <span>IBM Power</span><span>3000+ Workloads</span><span>Global DCs</span><span>AIX</span>
+            </div>
+          </article>
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+          <a href="projects.html" class="btn btn-gold">View All Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE WINDOW -->
+    <section id="experience" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Experience Timeline</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Azure Cloud Solutions Architect – IQVIA Inc (USA)</h3>
+              <div class="timeline-date">Nov 2022 – Present</div>
+              <p>
+                Azure Data Factory, DevOps pipelines, secure landing zones, and global data
+                platform solutions for healthcare product &amp; engineering teams.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Compute &amp; Cloud Solutions Architect – HCL America Inc</h3>
+              <div class="timeline-date">2013 – 2022</div>
+              <p>
+                Architected DC consolidations, Azure/AWS/GCP migrations, cloud-native designs,
+                and large-scale automation with Terraform and Ansible.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>UNIX Consultant – HCL Technologies Singapore</h3>
+              <div class="timeline-date">2012 – 2013</div>
+              <p>
+                IBM AIX data center setups, migrations from P5/6 to P7, and high-availability
+                cluster implementations.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>SME (AIX/Linux) – IBM India</h3>
+              <div class="timeline-date">2009 – 2012</div>
+              <p>
+                Supported 6000+ AIX servers, WebSphere/MQ/DB2 stacks, and Power virtualization
+                in enterprise environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- SKILLS WINDOW -->
+        <!-- SKILLS WINDOW -->
+    <section id="skills" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Skills Map</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+      
+        <!-- NEW FLEX-BASED SKILLS CONSOLE (no overlapping lines) -->
+        <div class="skills-map">
+          <div class="skills-center-panel">
+            <div class="skills-center-title">Madhavan Babu</div>
+            <div class="skills-center-sub">Cloud • Data • DevOps • Infra</div>
+            <div class="skills-center-meta">
+              <span>23+ Years</span>
+              <span>Multi-Cloud</span>
+              <span>DC Transformation</span>
+            </div>
+          </div>
+
+          <div class="skills-columns">
+            <!-- CLOUD & PLATFORMS -->
+            <div class="skills-column">
+              <div class="skills-node-title">Cloud &amp; Platforms</div>
+              <div class="skills-tags">
+                <span>Azure Cloud</span>
+                <span>AWS Cloud</span>
+                <span>Google Cloud</span>
+                <span>IBM Cloud</span>
+                <span>IaaS</span>
+                <span>PaaS</span>
+                <span>SaaS</span>
+                <span>Red Hat OpenStack</span>
+                <span>Red Hat OpenShift</span>
+                <span>IBM PowerVC</span>
+              </div>
+            </div>
+
+            <!-- DATA / ANALYTICS / DB -->
+            <div class="skills-column">
+              <div class="skills-node-title">Data, Analytics &amp; DB</div>
+              <div class="skills-tags">
+                <span>Azure Data Engineering</span>
+                <span>Power BI</span>
+                <span>Tableau</span>
+                <span>Oracle</span>
+                <span>RDS</span>
+                <span>NoSQL</span>
+                <span>Flash System Solutions</span>
+                <span>COE – AIX</span>
+                <span>Google Cloud Training</span>
+                <span>Azure Cloud Training</span>
+              </div>
+            </div>
+
+            <!-- DEVOPS / AUTOMATION -->
+            <div class="skills-column">
+              <div class="skills-node-title">DevOps &amp; Automation</div>
+              <div class="skills-tags">
+                <span>Azure DevOps</span>
+                <span>Jenkins Pipelines</span>
+                <span>Terraform</span>
+                <span>Ansible Automation</span>
+                <span>Azure Migrate</span>
+                <span>Platespin Migrate</span>
+                <span>BMC</span>
+                <span>Splunk</span>
+                <span>Red Hat Ansible Specialist</span>
+                <span>Automation Playbooks</span>
+              </div>
+            </div>
+
+            <!-- INFRA / VIRTUALIZATION / HA -->
+            <div class="skills-column">
+              <div class="skills-node-title">Infra, Virtualization &amp; HA</div>
+              <div class="skills-tags">
+                <!-- Virtualization / OS / Servers -->
+                <span>PowerVM</span>
+                <span>VMware</span>
+                <span>KVM</span>
+                <span>Linux (RHEL / SLES)</span>
+                <span>AIX</span>
+                <span>Windows</span>
+                <span>IBM P5 / P6 / P7 / P8</span>
+                <span>BladeCenter</span>
+                <!-- Storage / Converged -->
+                <span>SAN DS4K / DS5K / V7000 / XIV</span>
+                <span>Brocade &amp; Cisco SAN</span>
+                <span>IBM PureFlex</span>
+                <span>HP Converged Infrastructure</span>
+                <span>Nutanix (Hyper-converged)</span>
+                <!-- Network / Cluster / Containers / Backup -->
+                <span>L2 / L3 Networking</span>
+                <span>Firewall &amp; VLAN Tagging</span>
+                <span>HACMP</span>
+                <span>GPFS</span>
+                <span>VCS</span>
+                <span>PowerHA 7.1.3</span>
+                <span>AKS</span>
+                <span>Docker Engine</span>
+                <span>Linux Containers</span>
+                <span>IBM TSM</span>
+                <span>Rubrik</span>
+                <span>Azure Backup</span>
+                <!-- Deep AIX / Power training -->
+                <span>AU14 AIX5L Admin – Impl.</span>
+                <span>AU16 AIX5L Admin – Problem Determination</span>
+                <span>AU54 HACMP – Planning &amp; Impl.</span>
+                <span>AIX Virtualization &amp; Adv. Config</span>
+                <span>Veritas Cluster for AIX/Linux</span>
+                <span>IBM PureFlex for Power Systems</span>
+                <span>Linux on Power (LX21)</span>
+                <span>Power KVM (VX53)</span>
+                <span>Red Hat OpenStack Cloud</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- EDUCATION WINDOW -->
+    <section id="education" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Education</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Comprehensive academic journey from foundational engineering to advanced research in
+          artificial intelligence and multi-agent systems.
+        </p>
+        <div class="certs-grid">
+          <div class="cert-card">
+            <h3>Doctor of Philosophy (Ph.D.)</h3>
+            <ul>
+              <li><strong>Specialization:</strong> AI-Multi-Agent Systems (AI-MAS)</li>
+              <li><strong>University:</strong> Jagora University</li>
+              <li><strong>Registration:</strong> JU-WGU23/PD0127</li>
+              <li><strong>Status:</strong> In Progress (Commenced: 08 January 2023)</li>
+              <li><strong>Duration:</strong> Four (4) Years</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>Master of Science</h3>
+            <ul>
+              <li><strong>Degree:</strong> Master of Science in Data Science</li>
+              <li><strong>University:</strong> Jagora University, Cameroon</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>Bachelor's Degree</h3>
+            <ul>
+              <li><strong>Degree:</strong> Bachelor of Computer Applications (BCA)</li>
+              <li><strong>University:</strong> DR.C. V. RAMAN University</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>Diploma</h3>
+            <ul>
+              <li><strong>Diploma:</strong> Electronics and Communication Engineering</li>
+              <li><strong>Institution:</strong> Bakthavatchalam Polytechnic</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top: 16px; text-align: center;">
+          <a href="education.html" class="btn btn-gold">View Full Education Details</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS WINDOW -->
+    <section id="certs" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Certifications</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="certs-grid">
+          <div class="cert-card">
+            <h3>Microsoft Azure</h3>
+            <ul>
+              <li>Azure Solutions Architect Expert</li>
+              <li>Azure DevOps Engineer Expert</li>
+              <li>Azure Security Engineer Associate</li>
+              <li>Azure Data Engineer, DP-203 / DP-300 / DP-900 / AZ-900</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>AWS &amp; Cloud</h3>
+            <ul>
+              <li>AWS Solutions Architect – Associate</li>
+              <li>AWS Solutions Architect – Professional</li>
+              <li>IBM / Google Cloud trainings</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>Red Hat &amp; VMware</h3>
+            <ul>
+              <li>RHCSA, RHCE</li>
+              <li>Red Hat Specialist in Ansible &amp; OpenShift</li>
+              <li>VMware vSphere / vSAN / VCP-DCV</li>
+            </ul>
+          </div>
+          <div class="cert-card">
+            <h3>IBM Power &amp; AIX</h3>
+            <ul>
+              <li>IBM Certified System Admin &amp; PowerHA</li>
+              <li>Virtualization &amp; advanced configuration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS WINDOW -->
+    <section id="achievements" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Achievements &amp; Awards</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Recognition for excellence in cloud architecture, data engineering, and enterprise transformation.
+        </p>
+        <div class="certs-grid">
+          <div class="cert-card">
+            <h3>IQVIA Impact Award</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Recognition for outstanding contributions to Azure cloud platform design and data engineering solutions.
+            </p>
+          </div>
+          <div class="cert-card">
+            <h3>Client Appreciations</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Appreciated by many customers in HCL for best and quality deliverables, with consistent 
+              recognition for technical excellence and project execution.
+            </p>
+          </div>
+          <div class="cert-card">
+            <h3>Customer Awards</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Key member of the UNIX Problem Management team and won customer awards. Awarded for 
+              successful resource in UNIX capacity management.
+            </p>
+          </div>
+          <div class="cert-card">
+            <h3>Best Performing Employee</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Identified as high-performance resource and awarded "Best Performing Employee" for 
+              tenure in IBM. Key member of the HP Team (High Performance Team).
+            </p>
+          </div>
+          <div class="cert-card">
+            <h3>DR Excellence</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Key member of Four successful Disaster Recovery activities, demonstrating reliability 
+              and expertise in critical infrastructure operations.
+            </p>
+          </div>
+          <div class="cert-card">
+            <h3>CMS Computers Award</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+              Won Best performance award in "CMS Computers Limited" for exceptional technical contributions 
+              and customer service excellence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT WINDOW -->
+    <section id="contact" class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Contact</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body contact-body">
+        <div>
+          <p class="section-intro">
+            Let's discuss how we can architect cloud, data, and infrastructure systems that scale.
+          </p>
+          <p><strong>Email:</strong> <a href="mailto:madhavan.bb@gmail.com">madhavan.bb@gmail.com</a></p>
+          <p><strong>Phone:</strong> 484-609-7705</p>
+          <p><strong>Location:</strong> Lansdale, PA 19446, USA</p>
+          <p><strong>Address:</strong> 408 Sadie Avenue, Montgomery County, Heartfield Township, Lansdale, PA 19446</p>
+        </div>
+        <form class="contact-form">
+          <input type="text" placeholder="Your name" required />
+          <input type="email" placeholder="Your email" required />
+          <textarea rows="4" placeholder="Your message"></textarea>
+          <button type="submit" class="btn btn-gold">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>END_OF_DOCUMENT • REV 1.0 • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

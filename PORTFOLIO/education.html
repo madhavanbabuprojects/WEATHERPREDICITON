@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Education</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .education-timeline {
+      position: relative;
+      margin-top: 8px;
+      padding-left: 18px;
+    }
+
+    .education-timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .education-item {
+      position: relative;
+      margin-bottom: 24px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.92));
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.75);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .education-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+      border-color: rgba(212, 175, 55, 0.9);
+    }
+
+    .education-dot {
+      position: absolute;
+      left: 1px;
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212, 175, 55, 0.6);
+    }
+
+    .education-content {
+      padding-left: 20px;
+    }
+
+    .education-degree {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    .education-university {
+      font-size: 15px;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .education-details {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .education-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .education-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--gold-soft);
+    }
+
+    .education-specialization {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      padding-left: 12px;
+      border-left: 2px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .education-registration {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    .education-highlight {
+      background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15), rgba(15, 23, 42, 0.96));
+      border: 2px solid rgba(212, 175, 55, 0.7);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    }
+
+    .education-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .education-stat {
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
+    }
+
+    .education-stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .education-stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: EDUCATION</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: EDUCATION_MODULE</div>
+        <div class="boot-line">> source: ACADEMIC_QUALIFICATIONS</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">EDUCATION VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>education-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> loading: ACADEMIC_QUALIFICATIONS …</div>
+      <div>> loading: DEGREE_HISTORY …</div>
+      <div>> status: READY</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- EDUCATION STATS -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Academic Overview</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="education-stats">
+          <div class="education-stat">
+            <div class="education-stat-label">Highest Degree</div>
+            <div class="education-stat-value">Ph.D.</div>
+          </div>
+          <div class="education-stat">
+            <div class="education-stat-label">Specialization</div>
+            <div class="education-stat-value">AI-MAS</div>
+          </div>
+          <div class="education-stat">
+            <div class="education-stat-label">Total Qualifications</div>
+            <div class="education-stat-value">4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION TIMELINE -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Academic Qualifications — Education Timeline</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Comprehensive academic journey spanning from foundational engineering to advanced research
+          in artificial intelligence and multi-agent systems.
+        </p>
+
+        <div class="education-timeline">
+          <!-- Ph.D. -->
+          <div class="education-item education-highlight">
+            <div class="education-dot"></div>
+            <div class="education-content">
+              <div class="education-degree">Doctor of Philosophy (Ph.D.)</div>
+              <div class="education-university">Jagora University</div>
+              <div class="education-specialization">
+                <strong>Specialization:</strong> AI-Multi-Agent Systems (AI-MAS)
+              </div>
+              <div class="education-details">
+                <div>Registration Number: <span style="color: var(--gold); font-weight: 600;">JU-WGU23/PD0127</span></div>
+                <div>Admission Category: Regular</div>
+                <div>Commencement Date: 08 January 2023</div>
+                <div>Prescribed Duration: Four (4) Years</div>
+              </div>
+              <div class="education-meta">
+                <span class="education-badge">In Progress</span>
+                <span class="education-badge">Research</span>
+                <span class="education-badge">AI-MAS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Master's -->
+          <div class="education-item">
+            <div class="education-dot"></div>
+            <div class="education-content">
+              <div class="education-degree">Master of Science in Data Science</div>
+              <div class="education-university">Jagora University, Cameroon</div>
+              <div class="education-meta">
+                <span class="education-badge">Graduate</span>
+                <span class="education-badge">Data Science</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bachelor's -->
+          <div class="education-item">
+            <div class="education-dot"></div>
+            <div class="education-content">
+              <div class="education-degree">Bachelor of Computer Applications (BCA)</div>
+              <div class="education-university">DR.C. V. RAMAN University</div>
+              <div class="education-meta">
+                <span class="education-badge">Undergraduate</span>
+                <span class="education-badge">Computer Applications</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diploma -->
+          <div class="education-item">
+            <div class="education-dot"></div>
+            <div class="education-content">
+              <div class="education-degree">Diploma in Electronics and Communication Engineering</div>
+              <div class="education-university">Bakthavatchalam Polytechnic</div>
+              <div class="education-meta">
+                <span class="education-badge">Diploma</span>
+                <span class="education-badge">ECE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH FOCUS -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Research Focus — AI-Multi-Agent Systems</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          Current doctoral research focuses on <strong>AI-Multi-Agent Systems (AI-MAS)</strong>,
+          exploring distributed intelligence, agent coordination, and collaborative problem-solving
+          in complex computational environments.
+        </p>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>Research Domain</h3>
+            <p>
+              Advanced research in multi-agent systems, distributed AI architectures, and
+              intelligent agent coordination mechanisms.
+            </p>
+          </div>
+          <div class="summary-card">
+            <h3>Academic Foundation</h3>
+            <p>
+              Strong foundation in data science, computer applications, and electronics engineering,
+              providing a comprehensive technical base for AI research.
+            </p>
+          </div>
+          <div class="summary-card">
+            <h3>Practical Application</h3>
+            <p>
+              Research integrates with 23+ years of industry experience in cloud architecture,
+              data engineering, and enterprise-scale systems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: EDUCATION • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

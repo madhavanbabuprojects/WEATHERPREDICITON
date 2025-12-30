@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: EXPERIENCE</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: EXPERIENCE_MODULE</div>
+        <div class="boot-line">> source: ENTERPRISE_ROLES_TIMELINE</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">EXPERIENCE VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK (EXPERIENCE ACTIVE) -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item dock-active" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>experience-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> loading: ROLE_HISTORY …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- TIMELINE WINDOW -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Experience Timeline — Enterprise Roles</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+
+        <p class="section-intro">
+          Over 23 years of global experience across cloud, data, UNIX, and data center transformation programs —
+          from IBM and HCL to IQVIA and major enterprise customers.
+        </p>
+
+        <div class="timeline">
+          <!-- IQVIA -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Azure Cloud Solutions Architect — IQVIA Inc, USA</h3>
+              <div class="timeline-date">Nov 2022 – Present</div>
+              <p>
+                Responsible for Azure cloud architecture, data platform design, and automation for
+                Healthcare Compute Solution (HCS) and enterprise data platforms. Works with product
+                &amp; engineering teams to build secure, reusable cloud foundations.
+              </p>
+            </div>
+          </div>
+
+          <!-- HCL America -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Compute &amp; Cloud Solutions Architect — HCL America Inc</h3>
+              <div class="timeline-date">2013 – 2022</div>
+              <p>
+                Led global cloud and data center transformation programs for customers in healthcare,
+                telecom, and CPG. Designed Azure, AWS, and GCP architectures, AVS platforms, and
+                migration strategies for large UNIX and VMware estates.
+              </p>
+            </div>
+          </div>
+
+          <!-- HCL Singapore -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>UNIX Consultant — HCL Technologies Singapore Pte Ltd</h3>
+              <div class="timeline-date">2012 – 2013</div>
+              <p>
+                Worked as UNIX SME for large banking and enterprise environments, focusing on IBM
+                AIX, PowerHA clusters, virtualization, and performance tuning.
+              </p>
+            </div>
+          </div>
+
+          <!-- IBM India -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>SME (AIX / Linux) — IBM India</h3>
+              <div class="timeline-date">2009 – 2012</div>
+              <p>
+                Supported 6000+ AIX and Linux servers across WebSphere, MQ, DB2, and large middleware
+                stacks. Involved in capacity planning, high availability, and critical incident handling.
+              </p>
+            </div>
+          </div>
+
+          <!-- CMS Computers Limited -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Associate Customer Support Engineer — CMS Computers Limited, India</h3>
+              <div class="timeline-date">2006 – 2009</div>
+              <p>
+                Installed, configured, and administered AIX ver 5.3 on RS/6000 Midrange P615/630 series servers.
+                Performed OS installations using New and Complete overwrite, Preservation, Migration installation.
+                Managed device configuration, OS patches, maintenance levels, software installation and maintenance.
+                Won Best Performance Award for exceptional contributions.
+              </p>
+            </div>
+          </div>
+
+          <!-- ACERR INFOTEC -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Customer Support Executive — ACERR INFOTEC, India</h3>
+              <div class="timeline-date">2004 – 2006</div>
+              <p>
+                Installed Microsoft licensed software (Win95, Win98, Win2k, WinXP). Assembled systems with 
+                burn-in testing. Managed warranty replacements from authorized vendors. Maintained offsite 
+                warranty and non-warranty system services. Maintained stocks of new assembling machines and 
+                provided end user support.
+              </p>
+            </div>
+          </div>
+
+          <!-- CORE SYSTEMS -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Field Executive — CORE SYSTEMS PVT. LTD., India</h3>
+              <div class="timeline-date">2002 – 2004</div>
+              <p>
+                Installed consumer products including EDC (Electronic Data Captor Machine) and EPABX systems.
+                Performed fault diagnosis, testing, and telephonic support services. Assisted in troubleshooting 
+                hardware problems and end user support. Studied customer requirements and communicated to relevant 
+                departments. Provided value addition services during maintenance.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED ROLE CARDS WINDOW -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Detailed Responsibilities — Selected Roles</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="summary-grid">
+
+          <!-- IQVIA -->
+          <div class="summary-card">
+            <h3>Azure Cloud Solutions Architect — IQVIA Inc</h3>
+            <p style="margin-bottom:6px;color:var(--text-muted);font-size:12px;">
+              <strong>Focus:</strong> Azure data platform, ADF pipelines, landing zones, and security.
+            </p>
+            <ul style="font-size:12px;color:var(--text-muted);">
+              <li>Azure Data Factory design and pipeline configuration for data ingestion.</li>
+              <li>Self-hosted Integration Runtime configuration and repositories on premise for ingestion to the cloud.</li>
+              <li>Configure Azure SQL database servers and integration.</li>
+              <li>Configure linked services, data sets and pipeline template.</li>
+              <li>Build release bundles with Json scripts and ARM template.</li>
+              <li>Design and configure PowerShell script to deploy ADF.</li>
+              <li>Configure the GitHub and DevOps repository to upload client packages.</li>
+              <li>Design and deploy Azure DevOps pipeline to automate the ADF deployment.</li>
+              <li>Expertise in DC Consolidations and Cloud Data Migration.</li>
+              <li>Azure Security Center monitoring to address threats and resolve security vulnerabilities.</li>
+              <li>Developed strategy for cloud/virtualization migration and implementation best practices.</li>
+              <li>Designed and Setup Azure Landing Zone for Migrating Workloads for Globally distributed DC's.</li>
+              <li>Cloud application development solutions (IaaS, PaaS), continuous integration technologies (Jenkins, Azure DevOps, Ansible, Azure ARM Templates).</li>
+            </ul>
+          </div>
+
+          <!-- HCL America -->
+          <div class="summary-card">
+            <h3>Compute & Cloud Solutions Architect — HCL America</h3>
+            <p style="margin-bottom:6px;color:var(--text-muted);font-size:12px;">
+              <strong>Focus:</strong> DC consolidation, AVS migrations, and multi-cloud solutions.
+            </p>
+            <ul style="font-size:12px;color:var(--text-muted);">
+              <li>Expert in DC Consolidations and Cloud Migration, with Platform Migrations Strategy and V2V P2V migrations.</li>
+              <li>Deep Understanding of cloud computing technologies across Windows and UNIX.</li>
+              <li>Azure Core Platform: Compute, Storage, Networking.</li>
+              <li>Enable Identity & Access Management using AD, Azure AD and Privilege Identity Management SSO/Federation, AD/Azure AD.</li>
+              <li>Azure Security Center monitoring to address threats and resolve security vulnerabilities.</li>
+              <li>Developed strategy for cloud/virtualization migration and implementation best practices.</li>
+              <li>Designed and Setup Azure Landing Zone for Migrating 500+ Workloads for Globally distributed DC's.</li>
+              <li>Cloud application development solutions (IaaS, PaaS), continuous integration technologies (Jenkins, Azure DevOps, Ansible, Azure ARM Templates).</li>
+              <li>Automation of OS builds and Application Installation through Terraform.</li>
+              <li>Docker Engine, Containers, GitHub, Docker Images, Docker Hub.</li>
+              <li>Application migration from on-prem to Azure cloud.</li>
+              <li>Interface with senior management to develop, refine, and execute the Cloud Computing strategy and roadmap.</li>
+              <li>Enable customers with Cloud strategy and advise customers on effective architectural & implementation models for Private, Azure Public Cloud, Hybrid and Multi-Cloud scenario.</li>
+              <li>Experience in Architecting, Design, and Implementation of highly scalable, highly available, Cloud (IaaS, PaaS, SaaS) services and solutions for Private Cloud, Azure Public Cloud and Hybrid models.</li>
+              <li>Hands on experience in creating/building and deploying complex Cloud applications and infrastructure solutions in small, medium, and large enterprise environments.</li>
+              <li>Experience in Handling and Managing Customers from Banking, Retail, Consumer and Energy Verticals/Domain.</li>
+              <li>Expert Knowledge on Cloud Native and Cloud Agnostic Technologies like Dockers, Containers and Infrastructure as Code (IaC).</li>
+              <li>Expert understanding of security concerns with various hosting configurations (dedicated, shared, cluster, cloud, virtualized).</li>
+            </ul>
+          </div>
+
+          <!-- HCL Singapore -->
+          <div class="summary-card">
+            <h3>UNIX Consultant — HCL Technologies Singapore</h3>
+            <p style="margin-bottom:6px;color:var(--text-muted);font-size:12px;">
+              <strong>Focus:</strong> IBM AIX, PowerHA, virtualization, and performance tuning.
+            </p>
+            <ul style="font-size:12px;color:var(--text-muted);">
+              <li>Various IBM products like IBM AIX, IBM datacenter setup migration from P5/6 to P7 (DC to DC).</li>
+              <li>Excellent analytical, planning, designing of setup Data Centre.</li>
+              <li>Spear-headed Data Centre migration in large environment.</li>
+              <li>Setup DC for dual HMC with 5 Managed Machines with 10 dual VIO and 100+ P7 LPARS.</li>
+            </ul>
+          </div>
+
+          <!-- IBM India -->
+          <div class="summary-card">
+            <h3>SME (AIX / Linux) — IBM India</h3>
+            <p style="margin-bottom:6px;color:var(--text-muted);font-size:12px;">
+              <strong>Focus:</strong> Enterprise AIX support, middleware stacks, and DC operations.
+            </p>
+            <ul style="font-size:12px;color:var(--text-muted);">
+              <li>Supported 6000+ AIX servers across WebSphere, MQ, DB2, and application clusters.</li>
+              <li>Handled major incidents, RCA, and problem management for critical outages.</li>
+              <li>Worked on capacity planning and performance tuning for business-critical apps.</li>
+              <li>Automated routine tasks with scripts and standard operating procedures.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: EXPERIENCE • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

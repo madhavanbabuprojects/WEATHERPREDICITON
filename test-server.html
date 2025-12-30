@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Server Test</title>
+</head>
+<body>
+  <h1>Server Test</h1>
+  <p>Testing if server can access CSV files...</p>
+  <div id="results"></div>
+  <script>
+    async function test() {
+      const results = document.getElementById('results');
+      const testUrl = '/FRONTEND_EXPORT/PA/FORECAST/Ardmore/forecast_100d.csv';
+      
+      results.innerHTML = `<p>Testing: ${testUrl}</p>`;
+      
+      try {
+        const response = await fetch(testUrl);
+        results.innerHTML += `<p>Status: ${response.status} ${response.statusText}</p>`;
+        if (response.ok) {
+          const text = await response.text();
+          results.innerHTML += `<p style="color: green;">✅ SUCCESS! File loaded (${text.length} characters)</p>`;
+          results.innerHTML += `<p>First line: ${text.split('\n')[0]}</p>`;
+        } else {
+          results.innerHTML += `<p style="color: red;">❌ FAILED - Server returned ${response.status}</p>`;
+          results.innerHTML += `<p>Make sure server is running from project root!</p>`;
+        }
+      } catch (e) {
+        results.innerHTML += `<p style="color: red;">❌ ERROR: ${e.message}</p>`;
+      }
+    }
+    test();
+  </script>
+</body>
+</html>
+

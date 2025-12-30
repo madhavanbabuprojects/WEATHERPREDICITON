@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Weather Prediction – Pennsylvania Globe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Local Three.js (you already have three.min.js in this folder) -->
+  <script src="./three.min.js"></script>
+
+  <style>
+    :root {
+      --bg-space: radial-gradient(circle at top, #020617, #020617 40%, #020617 100%);
+      --bg-day: radial-gradient(circle at top, #38bdf8, #0f172a 50%, #020617 100%);
+      --bg-night: radial-gradient(circle at top, #020617, #020617 50%, #020617 100%);
+      --glass-bg: rgba(15, 23, 42, 0.82);
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.3);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.75);
+      --radius-lg: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--bg-space);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body[data-theme="day"] {
+      background: var(--bg-day);
+    }
+
+    body[data-theme="night"] {
+      background: var(--bg-night);
+    }
+
+    #globe-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    /* Fallback circle if WebGL fails */
+    .globe-fallback {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(420px, 70vw);
+      height: min(420px, 70vw);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(248, 250, 252, 0.18), transparent 60%),
+        radial-gradient(circle at 70% 80%, rgba(56, 189, 248, 0.24), transparent 65%),
+        radial-gradient(circle at 50% 50%, #0b1120, #020617 72%);
+      box-shadow:
+        0 60px 120px rgba(15, 23, 42, 0.85),
+        0 0 35px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+      text-align: center;
+      padding: 18px;
+      animation: slow-rotate 28s linear infinite;
+      z-index: 1;
+    }
+
+    .globe-fallback span {
+      position: relative;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    @keyframes slow-rotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Glow halo around the globe */
+    .globe-halo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(620px, 90vw);
+      height: min(620px, 90vw);
+      border-radius: 50%;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow:
+        0 0 60px rgba(59, 130, 246, 0.6),
+        0 0 120px rgba(15, 23, 42, 0.9);
+      opacity: 0.35;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      animation: halo-pulse 6s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes halo-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+      50%      { transform: translate(-50%, -50%) scale(1.06); opacity: 0.5; }
+    }
+
+    /* Soft vignette */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+      mix-blend-mode: multiply;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    /* Top-left hero */
+    .ui-overlay {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      padding: 18px 22px;
+      max-width: 380px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .ui-overlay::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.25), transparent 55%);
+      opacity: 0.35;
+      filter: blur(6px);
+      pointer-events: none;
+    }
+
+    .ui-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #a5b4fc;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      animation: dot-pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.4); opacity: 0.75; }
+    }
+
+    .title-main {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      letter-spacing: -0.8px;
+      background: linear-gradient(120deg, #e5e7eb 0%, #a5b4fc 50%, #5eead4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: title-shimmer 3s ease-in-out infinite;
+      text-transform: uppercase;
+    }
+
+    @keyframes title-shimmer {
+      0%, 100% {
+        background: linear-gradient(120deg, #e5e7eb 0%, #a5b4fc 50%, #5eead4 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        filter: drop-shadow(0 0 8px rgba(79, 209, 197, 0.2));
+      }
+      50% {
+        background: linear-gradient(120deg, #5eead4 0%, #e5e7eb 50%, #a5b4fc 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        filter: drop-shadow(0 0 16px rgba(79, 209, 197, 0.5));
+      }
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      opacity: 0;
+      display: none;
+      pointer-events: none;
+    }
+
+    .chip-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 70%);
+      backdrop-filter: blur(14px);
+      animation: chip-float 10s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    .chip:nth-child(2) { animation-delay: 1.3s; }
+    .chip:nth-child(3) { animation-delay: 2.6s; }
+    .chip:nth-child(4) { animation-delay: 3.9s; }
+
+    @keyframes chip-float {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-4px); }
+    }
+
+    .primary-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at top left, #4ade80, #22c55e);
+      color: #022c22;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(34, 197, 94, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      animation: cta-pop 0.8s ease-out 0.2s backwards;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    .primary-cta span.icon {
+      font-size: 15px;
+      translate: 0 0;
+      transition: translate 0.12s ease;
+    }
+
+    .primary-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.8);
+      opacity: 0.98;
+    }
+
+    .primary-cta:hover span.icon {
+      translate: 2px 0;
+    }
+
+    @keyframes cta-pop {
+      from { transform: translateY(8px) scale(0.97); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Info block with city coverage */
+    /* Info carousel with slider */
+    .info-carousel {
+      margin-top: 18px;
+      width: 100%;
+      pointer-events: auto;
+      animation: block-fade 0.8s ease-out 0.4s backwards;
+    }
+
+    .info-track {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @keyframes block-fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-item {
+      min-width: 220px;
+      flex: 0 0 auto;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(79, 209, 197, 0.3);
+      background: linear-gradient(135deg, rgba(79, 209, 197, 0.08), rgba(129, 140, 248, 0.08));
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .info-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.12), transparent);
+      animation: shimmer 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .info-item:hover {
+      border-color: rgba(79, 209, 197, 0.6);
+      background: linear-gradient(135deg, rgba(79, 209, 197, 0.15), rgba(129, 140, 248, 0.15));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79, 209, 197, 0.2);
+    }
+
+    .info-item-label {
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4fd1c5;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .info-item-text {
+      font-size: 14px;
+      color: #e5e7eb;
+      line-height: 1.35;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .info-item-number {
+      font-size: 18px;
+      font-weight: 700;
+      color: #5eead4;
+      margin-bottom: 4px;
+    }
+
+    input#infoSlider {
+      width: 100%;
+      margin-top: 10px;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(79,209,197,0.25), rgba(129,140,248,0.15));
+      outline: none;
+      accent-color: #4fd1c5;
+    }
+
+    input#infoSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #4fd1c5;
+      box-shadow: 0 6px 18px rgba(79,209,197,0.35);
+      cursor: pointer;
+      border: 2px solid rgba(10,25,30,0.12);
+    }
+
+    @media (max-width: 500px) {
+      .info-track { gap: 8px; }
+      .info-item { min-width: 180px; }
+    }
+
+    @media (max-width: 900px) {
+      .info-block {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .info-block {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+    /* Floating tags */
+    .floating-tag {
+      position: absolute;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      z-index: 9;
+      animation: tag-float 14s ease-in-out infinite;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .floating-tag strong {
+      color: #e5e7eb;
+    }
+
+    .floating-tag--bottom {
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      animation-delay: 3s;
+    }
+
+    @keyframes tag-float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(-6px); }
+    }
+
+    /* Zoom controls */
+    .zoom-controls {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    .zoom-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 209, 197, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: #4fd1c5;
+      font-size: 22px;
+      line-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: all;
+      box-shadow: 0 8px 32px rgba(79, 209, 197, 0.3);
+      transition: all 0.2s ease;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    #zoomOutBtn {
+      left: 26px;
+    }
+
+    #zoomInBtn {
+      right: 26px;
+    }
+
+    .zoom-btn:hover {
+      background: rgba(79, 209, 197, 0.2);
+      border-color: rgba(79, 209, 197, 0.9);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 12px 40px rgba(79, 209, 197, 0.5);
+    }
+
+    .zoom-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    @media (max-width: 900px) {
+      .ui-overlay {
+        max-width: 80vw;
+      }
+
+      .zoom-controls {
+        left: 18px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="night">
+  <div id="globe-container">
+    <div class="vignette"></div>
+    <div class="globe-halo"></div>
+
+    <div class="ui-overlay">
+      <div class="ui-inner">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          AI WEATHER · PENNSYLVANIA
+        </div>
+        <div class="title-main">
+          AI Weather Prediction
+        </div>
+        <div class="subtitle">
+          Spin the Earth, then dive into ultra-detailed hourly and long-range outlooks for Pennsylvania.
+        </div>
+        <div class="chip-row">
+          <button class="primary-cta" onclick="window.location.href='hourly.html'">
+            SHOW FORECAST
+          </button>
+        </div>
+
+        <div class="info-block">
+          <div class="info-item">
+            <div class="info-item-label">📍 PENNSYLVANIA CITIES</div>
+            <div class="info-item-number">15</div>
+            <div class="info-item-text">Predicted weather available for major PA cities</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-label">🗽 REST OF USA</div>
+            <div class="info-item-text">More states in the United States coming soon</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-label">🌍 GLOBAL COVERAGE</div>
+            <div class="info-item-text">International cities worldwide coming soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-tag floating-tag--bottom">
+      HOVER • DRAG • SCROLL • CLICK GLOWING PINS
+    </div>
+
+    <div class="zoom-controls">
+      <button class="zoom-btn" id="zoomInBtn">+</button>
+      <button class="zoom-btn" id="zoomOutBtn">−</button>
+    </div>
+
+    <div class="globe-fallback" id="globeFallback">
+      <span>Loading interactive globe…</span>
+    </div>
+  </div>
+
+  <script>
+    // Theme based on user local time
+    (function setInitialTheme() {
+      const hour = new Date().getHours();
+      document.body.setAttribute("data-theme", (hour >= 6 && hour < 18) ? "day" : "night");
+    })();
+
+    const globeFallback = document.getElementById("globeFallback");
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+
+    (function initGlobe() {
+      try {
+        if (typeof THREE === "undefined") {
+          globeFallback.querySelector("span").textContent =
+            "WebGL library could not load – showing static globe.";
+          return;
+        }
+
+        const container = document.getElementById("globe-container");
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          100
+        );
+        const initialDistance = 3.2;
+        camera.position.set(0, 0, initialDistance);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio || 1);
+        renderer.setClearColor(0x000000, 0);
+        container.insertBefore(renderer.domElement, container.firstChild);
+
+        globeFallback.style.display = "none";
+
+        const earthRadius = 1;
+        const earthGeometry = new THREE.SphereGeometry(earthRadius, 64, 64);
+
+        const textureLoader = new THREE.TextureLoader();
+        const earthTexture = textureLoader.load(
+          "https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg"
+        );
+
+        const earthMaterial = new THREE.MeshPhongMaterial({
+          map: earthTexture,
+          emissive: 0x0f172a,
+          shininess: 18,
+          specular: 0x93c5fd,
+        });
+        const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+        scene.add(earthMesh);
+
+        // Atmosphere glow
+        const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.03, 64, 64);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({
+          color: 0x4fd1c5,
+          transparent: true,
+          opacity: 0.16,
+          side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphere);
+
+        // Subtle grid (lat/long feel)
+        const gridGeometry = new THREE.SphereGeometry(earthRadius * 1.0015, 32, 32);
+        const gridMaterial = new THREE.MeshBasicMaterial({
+          color: 0x111827,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.35
+        });
+        const grid = new THREE.Mesh(gridGeometry, gridMaterial);
+        scene.add(grid);
+
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.4);
+        sunLight.position.set(-3, 2, 2);
+        scene.add(sunLight);
+
+        const ambient = new THREE.AmbientLight(0x4b5563, 0.6);
+        scene.add(ambient);
+
+        // Stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starCount = 700;
+        const positions = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount * 3; i += 3) {
+          const r = 18;
+          positions[i] = (Math.random() - 0.5) * r;
+          positions[i + 1] = (Math.random() - 0.5) * r;
+          positions[i + 2] = (Math.random() - 0.5) * r;
+        }
+        starsGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ size: 0.035, color: 0xffffff });
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        // City markers (bigger + glow + pulse)
+        const markerGeometry = new THREE.SphereGeometry(0.02, 12, 12);
+        const markerMaterialBase = new THREE.MeshBasicMaterial({ color: 0x4fd1c5 });
+        const markerMeshes = [];
+
+        if (typeof CITIES !== 'undefined' && Array.isArray(CITIES)) {
+          CITIES.forEach((city, index) => {
+            const marker = new THREE.Mesh(markerGeometry, markerMaterialBase.clone());
+
+            const phi = (90 - city.lat) * (Math.PI / 180);
+            const theta = (city.lon + 180) * (Math.PI / 180);
+            const x = -earthRadius * Math.sin(phi) * Math.cos(theta) * 1.01;
+            const z = earthRadius * Math.sin(phi) * Math.sin(theta) * 1.01;
+            const y = earthRadius * Math.cos(phi) * 1.01;
+            marker.position.set(x, y, z);
+
+            const glowGeometry = new THREE.SphereGeometry(0.035, 8, 8);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+              color: 0x4fd1c5,
+              transparent: true,
+              opacity: 0.25
+            });
+            const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+            glowMesh.position.copy(marker.position);
+            marker.add(glowMesh);
+
+            marker.userData.cityId = city.id;
+            marker.userData.index = index;
+            scene.add(marker);
+            markerMeshes.push(marker);
+          });
+        }
+
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        function handleClick(event) {
+          const rect = renderer.domElement.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+          mouse.set(x, y);
+          raycaster.setFromCamera(mouse, camera);
+          const hits = raycaster.intersectObjects(markerMeshes, false);
+          if (hits.length > 0) {
+            const marker = hits[0].object;
+            const cityId = marker.userData.cityId;
+            const city = (typeof CITIES !== 'undefined' && Array.isArray(CITIES))
+              ? CITIES.find(c => c.id === cityId)
+              : null;
+            if (city) {
+              if (typeof setActiveCity === 'function') setActiveCity(city);
+              if (typeof focusOnCity === 'function') focusOnCity(city);
+              window.location.href = `hourly.html?city=${encodeURIComponent(city.id)}`;
+            }
+          }
+        }
+
+        renderer.domElement.addEventListener('pointerdown', handleClick);
+
+        // Drag rotate
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        renderer.domElement.addEventListener("pointerdown", (e) => {
+          isDragging = true;
+          previousMousePosition.x = e.clientX;
+          previousMousePosition.y = e.clientY;
+        });
+
+        window.addEventListener("pointerup", () => {
+          isDragging = false;
+        });
+
+        window.addEventListener("pointermove", (e) => {
+          if (!isDragging) return;
+          const deltaX = e.clientX - previousMousePosition.x;
+          const deltaY = e.clientY - previousMousePosition.y;
+          previousMousePosition.x = e.clientX;
+          previousMousePosition.y = e.clientY;
+
+          const rotationSpeed = 0.005;
+          earthMesh.rotation.y += deltaX * rotationSpeed;
+          earthMesh.rotation.x += deltaY * rotationSpeed;
+          grid.rotation.copy(earthMesh.rotation);
+          atmosphere.rotation.copy(earthMesh.rotation);
+        });
+
+        // Zoom
+        function adjustZoom(delta) {
+          const minDist = 2.0;
+          const maxDist = 5.0;
+          const currentDist = camera.position.length();
+          let newDist = THREE.MathUtils.clamp(currentDist + delta, minDist, maxDist);
+          const dir = camera.position.clone().normalize();
+          camera.position.copy(dir.multiplyScalar(newDist));
+        }
+
+        zoomInBtn.addEventListener("click", () => adjustZoom(-0.3));
+        zoomOutBtn.addEventListener("click", () => adjustZoom(0.3));
+
+        renderer.domElement.addEventListener("wheel", (event) => {
+          event.preventDefault();
+          const delta = event.deltaY > 0 ? 0.25 : -0.25;
+          adjustZoom(delta);
+        }, { passive: false });
+
+        // Animate
+        function animate() {
+          requestAnimationFrame(animate);
+
+          earthMesh.rotation.y += 0.0009;
+          grid.rotation.y += 0.0009;
+          atmosphere.rotation.y += 0.0009;
+          stars.rotation.y += 0.00005;
+
+          const t = Date.now() * 0.002;
+          markerMeshes.forEach((m, i) => {
+            const s = 1 + 0.25 * Math.sin(t + i * 0.7);
+            m.scale.setScalar(s);
+          });
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener("resize", () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      } catch (err) {
+        console.error('Globe init error:', err);
+        try {
+          globeFallback.style.display = 'flex';
+          globeFallback.querySelector('span').textContent = 'Error initializing globe — see console.';
+        } catch (_) {}
+      }
+    })();
+  </script>
+</body>
+</html>

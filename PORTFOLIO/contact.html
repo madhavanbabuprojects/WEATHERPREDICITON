@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCH_23 OS | Contact</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">ARCH_23<span class="boot-dot">•OS</span></div>
+      <div class="boot-subtitle">Loading module: CONTACT</div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">> booting: CONTACT_MODULE</div>
+        <div class="boot-line">> target: CLOUD / DATA / TRANSFORMATION OPPORTUNITIES</div>
+        <div class="boot-line" id="boot-status-line">> status: LOADING …</div>
+      </div>
+
+      <div class="boot-progress">
+        <div class="boot-progress-bar" id="boot-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="os-bar">
+    <div class="os-left">
+      <span class="os-logo">ARCH_23 OS</span>
+      <span class="os-tag">CONTACT VIEW</span>
+    </div>
+    <div class="os-right">
+      <span class="os-user">User: Madhavan</span>
+      <span class="os-status-dot"></span>
+      <span id="os-clock"></span>
+    </div>
+  </header>
+
+  <!-- DOCK (CONTACT ACTIVE) -->
+  <nav class="os-dock">
+    <a class="dock-item" href="index.html">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Dashboard</span>
+    </a>
+    <a class="dock-item" href="summary.html">
+      <span class="dock-icon">📄</span>
+      <span class="dock-label">Summary</span>
+    </a>
+    <a class="dock-item" href="projects.html">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">Projects</span>
+    </a>
+    <a class="dock-item" href="experience.html">
+      <span class="dock-icon">📊</span>
+      <span class="dock-label">Experience</span>
+    </a>
+    <a class="dock-item" href="skills.html">
+      <span class="dock-icon">🛠</span>
+      <span class="dock-label">Skills</span>
+    </a>
+    <a class="dock-item" href="education.html">
+      <span class="dock-icon">🎓</span>
+      <span class="dock-label">Education</span>
+    </a>
+    <a class="dock-item" href="certs.html">
+      <span class="dock-icon">🏆</span>
+      <span class="dock-label">Certs</span>
+    </a>
+    <a class="dock-item dock-active" href="contact.html">
+      <span class="dock-icon">📬</span>
+      <span class="dock-label">Contact</span>
+    </a>
+  </nav>
+
+  <!-- MINI TERMINAL -->
+  <div class="mini-terminal">
+    <div class="mini-term-header">
+      <span>contact-terminal</span>
+      <div class="mini-term-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
+    <div class="mini-term-body" id="mini-term-body">
+      <div>> listening_for: NEW_ENGAGEMENTS …</div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <main class="desktop">
+
+    <!-- MAIN CONTACT WINDOW -->
+    <section class="window window-large reveal">
+      <div class="window-header">
+        <div class="window-title">Contact — Initiate New Session</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+
+      <div class="window-body contact-body">
+        <div>
+          <p class="section-intro">
+            If you’re planning a cloud migration, data platform build, DC consolidation, or want
+            an architect to review your current environment, you can reach out directly using the
+            details below or send a message through this form.
+          </p>
+
+          <p style="font-size:13px;margin-bottom:6px;">
+            <strong>Email:</strong>
+            <a href="mailto:madhavan.bb@gmail.com">madhavan.bb@gmail.com</a>
+          </p>
+          <p style="font-size:13px;margin-bottom:6px;">
+            <strong>Phone:</strong> 484-609-7705
+          </p>
+          <p style="font-size:13px;margin-bottom:6px;">
+            <strong>Location:</strong> Lansdale, PA, USA
+          </p>
+          <p style="font-size:13px;margin-bottom:6px;">
+            <strong>Resume:</strong>
+            <a href="Madhavan Resume.pdf" target="_blank">Download full resume (PDF)</a>
+          </p>
+
+          <p style="font-size:13px;color:var(--text-muted);margin-top:10px;">
+            Typical work includes: Azure landing zones, AVS migrations, ADF / Databricks data
+            platforms, Snowflake integration, DC consolidation programs, and infrastructure
+            modernization across UNIX, VMware, and Windows.
+          </p>
+        </div>
+
+        <form class="contact-form">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <input type="text" name="subject" placeholder="Subject (e.g., Cloud Migration, Data Platform)" />
+          <textarea rows="4" name="message" placeholder="Briefly describe what you’d like to discuss"></textarea>
+          <button type="submit" class="btn btn-gold">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PERSONAL INFORMATION WINDOW -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Personal Information</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="summary-card" style="max-width: 500px; margin: 0 auto;">
+          <h3>Personal Details</h3>
+          <ul style="list-style: none; padding: 0; font-size: 13px; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;"><strong>Name:</strong> Madhavan Babu</li>
+            <li style="margin-bottom: 8px;"><strong>Date of Birth:</strong> 06-05-1984</li>
+            <li><strong>Address:</strong> 408 Sadie Avenue, Montgomery County, Heartfield Township, Lansdale, PA 19446</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVAILABILITY / ENGAGEMENT WINDOW -->
+    <section class="window reveal">
+      <div class="window-header">
+        <div class="window-title">Engagement Modes — How I Usually Work</div>
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+      </div>
+      <div class="window-body">
+        <p class="section-intro">
+          High-level overview of how you can plug this expertise into your organization.
+        </p>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>Architecture Reviews</h3>
+            <p>
+              Short, focused reviews of existing cloud, DC, or data platform designs with
+              recommendations on scalability, security, cost, and resilience.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <h3>Migration &amp; Transformation Programs</h3>
+            <p>
+              End-to-end guidance for DC consolidations, AVS migrations, and lift-and-shift /
+              modernization strategies across Azure, AWS, and hybrid environments.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <h3>Data Platform Builds</h3>
+            <p>
+              Design of ADF / Databricks / Snowflake based data platforms for analytics, reporting,
+              and large-scale healthcare or enterprise datasets.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <h3>Coaching &amp; Technical Leadership</h3>
+            <p>
+              Mentoring engineering teams, setting reference architectures, and helping define
+              standards, patterns, and reusable templates for your cloud and DC teams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MODULE: CONTACT • © <span id="year"></span> MADHAVAN BABU</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
